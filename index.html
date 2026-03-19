@@ -531,6 +531,7 @@ th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;
     <div class="sb-link active" data-p="home" onclick="go('home')"><i class="ico">🏠</i> Home</div>
     <div class="sb-link" data-p="dashboard" onclick="go('dashboard')"><i class="ico">📊</i> My Progress</div>
     <div class="sb-link" data-p="roadmap" onclick="go('roadmap')"><i class="ico">🗺️</i> Learning Roadmap</div>
+    <div class="sb-link" data-p="admin" onclick="go('admin')"><i class="ico">⚙️</i> Content Admin</div>
   </div>
   <div class="sb-sec">
     <div class="sb-lbl">Foundations</div>
@@ -926,6 +927,36 @@ th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;
 <!-- ───────── SEARCH (dynamic) ───────── -->
 <section class="page" id="page-search"></section>
 
+<!-- ───────── ADMIN DASHBOARD ───────── -->
+<section class="page" id="page-admin">
+  <div class="sh"><h2>⚙️ Content Management Admin</h2></div>
+  <p style="color:var(--text2);font-size:.875rem;margin-bottom:1rem">Manage your dynamic MongoDB lessons here.</p>
+  
+  <div class="g g2">
+    <!-- ADD LESSON FORM -->
+    <div class="card" style="cursor:default">
+      <h3 style="margin-bottom:1rem">➕ Add New Lesson</h3>
+      <input type="text" id="adminLessonId" class="note-input" placeholder="ID (e.g., intro-python)" />
+      <input type="text" id="adminTitle" class="note-input" placeholder="Title (e.g., 🐍 Python Variables)" />
+      <input type="text" id="adminSubtitle" class="note-input" placeholder="Subtitle" />
+      <select id="adminTag" class="note-input">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+      <input type="number" id="adminXp" class="note-input" placeholder="XP (e.g., 100)" />
+      <textarea id="adminHtml" class="note-input" rows="5" placeholder="<h2>HTML Content</h2><p>Lesson goes here...</p>"></textarea>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" onclick="submitAdminLesson()">🚀 Publish Course</button>
+    </div>
+
+    <!-- LIST LESSONS -->
+    <div class="card" style="cursor:default">
+      <h3 style="margin-bottom:1rem">📚 Live Database Lessons</h3>
+      <div id="adminLessonList" style="display:flex;flex-direction:column;gap:.5rem"></div>
+    </div>
+  </div>
+</section>
+
 </main>
 </div><!-- /layout -->
 
@@ -992,6 +1023,7 @@ function go(pageId, extra = {}) {
   if (pageId === 'dashboard') buildDash();
   if (pageId === 'quiz') buildQuiz(extra.topic || 'general');
   if (pageId === 'search') renderSearch(extra.q || '');
+  if (pageId === 'admin') renderAdmin();
   closeSidebar();
 }
 
@@ -1075,7 +1107,7 @@ document.getElementById('searchInput').addEventListener('keyup', e => { if (e.ke
 // ══════════════════════════════════════
 //  LESSON CONTENT
 // ══════════════════════════════════════
-const LESSONS = {
+let LESSONS = {
   'intro-computer': {
     title:'💻 What is a Computer?', subtitle:'Understanding the machine that runs the world',
     tag:'beginner', xp:50,
@@ -1994,9 +2026,102 @@ async function deleteNote(id) {
   }
 }
 
+// ── Dynamic Lessons API ──
+const LESSONS_API_URL = 'http://localhost:5000/api/lessons';
+async function initLessons() {
+  try {
+    const res = await fetch(LESSONS_API_URL);
+    if (res.ok) {
+      const data = await res.json();
+      data.forEach(l => {
+        LESSONS[l.lessonId] = {
+          title: l.title, subtitle: l.subtitle, tag: l.tag,
+          xp: l.xp, toc: l.toc, html: l.html
+        };
+      });
+    }
+  } catch (err) {
+    console.warn("Could not load dynamic lessons. Using defaults.", err);
+  }
+}
+
+// ── Admin Dashboard ──
+function renderAdmin() {
+  const list = document.getElementById('adminLessonList');
+  if(!list) return;
+  list.innerHTML = Object.keys(LESSONS).map(id => {
+    return `<div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg2);padding:.5rem;border-radius:4px">
+      <span style="font-size:.85rem"><strong>${id}</strong> - ${LESSONS[id].title}</span>
+      <button class="btn btn-ghost" style="color:var(--red);padding:.2rem .5rem" onclick="deleteAdminLesson('${id}')">Delete</button>
+    </div>`;
+  }).join('');
+}
+
+async function submitAdminLesson() {
+  const lessonId = document.getElementById('adminLessonId').value.trim();
+  const title = document.getElementById('adminTitle').value.trim();
+  const subtitle = document.getElementById('adminSubtitle').value.trim();
+  const tag = document.getElementById('adminTag').value;
+  const xp = +document.getElementById('adminXp').value || 50;
+  const html = document.getElementById('adminHtml').value.trim();
+  
+  if(!lessonId || !title || !html) return toast('❗ ID, Title, and HTML are required!');
+  
+  const pass = prompt("Enter Admin Password to publish:");
+  if(!pass) return toast("Canceled.");
+  
+  try {
+    const res = await fetch(LESSONS_API_URL, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': pass
+      },
+      body: JSON.stringify({ lessonId, title, subtitle, tag, xp, html, toc:[] })
+    });
+    if(!res.ok) throw new Error('API Error');
+    toast('✅ Lesson Published Live!');
+    
+    // Clear form
+    document.getElementById('adminLessonId').value = '';
+    document.getElementById('adminTitle').value = '';
+    document.getElementById('adminSubtitle').value = '';
+    document.getElementById('adminHtml').value = '';
+    
+    await initLessons();
+    renderAdmin();
+  } catch(err) {
+    toast('❌ Failed to publish lesson. Check console.');
+  }
+}
+
+async function deleteAdminLesson(id) {
+  if(!confirm('Delete lesson ' + id + '? This affects the live database!')) return;
+  const pass = prompt("Enter Admin Password to delete:");
+  if(!pass) return toast("Canceled.");
+  
+  try {
+    const res = await fetch(LESSONS_API_URL + '/' + id, { 
+      method: 'DELETE',
+      headers: { 'Authorization': pass }
+    });
+    if(res.ok) {
+      toast('🗑️ Lesson deleted!');
+      delete LESSONS[id];
+      renderAdmin();
+    } else {
+      toast('❌ Failed to delete.');
+    }
+  } catch(err) {
+    toast('❌ Error connecting to backend.');
+  }
+}
+
 // ── Init ──
-updateXP();
-updateAchievements();
+initLessons().then(() => {
+  updateXP();
+  updateAchievements();
+});
 </script>
 </body>
 </html>
