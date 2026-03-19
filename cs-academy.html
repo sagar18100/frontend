@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS Academy — Learn Computer Science from Zero to Advanced</title>
+<meta name="description" content="Free Computer Science education from beginner to advanced. HTML, CSS, JavaScript, Python, C++, web development, algorithms and more.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+/* ============================================================
+   CS ACADEMY — COMPLETE STYLESHEET
+   Theme: Deep Navy + Electric Teal + Amber
+   Fonts: Syne (display) + DM Sans (body) + JetBrains Mono (code)
+============================================================ */
+
+/* ── Variables ── */
+:root {
+  --bg:       #080c18;
+  --bg2:      #0d1220;
+  --bg3:      #111828;
+  --surface:  #161d2e;
+  --surface2: #1c2438;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.13);
+  --text:     #e6e9f2;
+  --text2:    #8a95b0;
+  --text3:    #4e5a78;
+  --accent:   #00d4b4;
+  --accent2:  #00b89c;
+  --amber:    #f5a623;
+  --pink:     #ff6b9d;
+  --blue:     #4a9eff;
+  --purple:   #9b72ff;
+  --green:    #22c55e;
+  --red:      #ff5757;
+  --nav-h:    62px;
+  --side-w:   252px;
+  --radius:   13px;
+  --radius-sm:8px;
+  --radius-lg:20px;
+  --shadow:   0 8px 40px rgba(0,0,0,.5);
+  --glow:     0 0 40px rgba(0,212,180,.12);
+  --trans:    .22s cubic-bezier(.4,0,.2,1);
+  --font-d:   'Syne', sans-serif;
+  --font-b:   'DM Sans', sans-serif;
+  --font-m:   'JetBrains Mono', monospace;
+}
+[data-theme="light"] {
+  --bg:#f0f3fb; --bg2:#e8ecf8; --bg3:#fff;
+  --surface:#fff; --surface2:#f4f6ff;
+  --border:rgba(0,0,0,.07); --border2:rgba(0,0,0,.12);
+  --text:#111827; --text2:#4b5563; --text3:#9ca3af;
+  --shadow:0 8px 40px rgba(0,0,0,.1);
+  --glow:0 0 40px rgba(0,180,155,.1);
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background var(--trans),color var(--trans)}
+a{color:var(--accent);text-decoration:none;transition:color var(--trans)}
+a:hover{color:var(--accent2)}
+button{cursor:pointer;font-family:var(--font-b)}
+img{max-width:100%}
+ul{list-style:none}
+h1,h2,h3,h4,h5{font-family:var(--font-d);line-height:1.2}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--surface2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+/* ══ NAVBAR ══ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--nav-h);
+  background:rgba(8,12,24,.88);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 1.25rem;gap:.75rem;
+}
+[data-theme="light"] .navbar{background:rgba(240,243,251,.92)}
+.nav-logo{
+  display:flex;align-items:center;gap:.5rem;
+  font-family:var(--font-d);font-size:1.2rem;font-weight:800;
+  color:var(--text);white-space:nowrap;cursor:pointer;
+}
+.logo-box{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--blue));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;box-shadow:0 0 14px rgba(0,212,180,.4);
+}
+.logo-box::after{content:'⚡'}
+.nav-logo .hl{color:var(--accent)}
+.nav-search{
+  flex:1;max-width:380px;
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:40px;padding:.38rem .9rem;
+  transition:border-color var(--trans),box-shadow var(--trans);
+}
+.nav-search:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,212,180,.15)}
+.nav-search svg{color:var(--text3);flex-shrink:0}
+.nav-search input{
+  background:none;border:none;outline:none;
+  color:var(--text);font-family:var(--font-b);font-size:.85rem;width:100%;
+}
+.nav-search input::placeholder{color:var(--text3)}
+.nav-actions{display:flex;align-items:center;gap:.4rem;margin-left:auto}
+.xp-pill{
+  display:flex;align-items:center;gap:.35rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:40px;padding:.28rem .7rem;font-size:.78rem;cursor:pointer;
+}
+.xp-pill .num{font-weight:700;color:var(--amber);font-family:var(--font-d)}
+.btn-icon{
+  width:34px;height:34px;background:var(--surface);
+  border:1px solid var(--border);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);transition:all var(--trans);font-size:.95rem;
+}
+.btn-icon:hover{background:var(--surface2);color:var(--accent);border-color:var(--accent)}
+.btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.46rem 1.1rem;border-radius:40px;
+  font-size:.83rem;font-weight:600;border:none;
+  transition:all var(--trans);white-space:nowrap;font-family:var(--font-b);
+}
+.btn-primary{background:var(--accent);color:#080c18}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 18px rgba(0,212,180,.35)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-amber{background:var(--amber);color:#111}
+.btn-amber:hover{background:#e09010;transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px}
+.burger span{display:block;width:21px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+
+/* ══ LAYOUT ══ */
+.layout{display:flex;padding-top:var(--nav-h);min-height:100vh}
+
+/* ══ SIDEBAR ══ */
+.sidebar{
+  width:var(--side-w);
+  position:fixed;left:0;top:var(--nav-h);bottom:0;
+  background:var(--bg2);border-right:1px solid var(--border);
+  overflow-y:auto;padding:1.25rem 0;
+  transition:transform var(--trans);z-index:900;
+}
+.sb-sec{margin-bottom:1.25rem}
+.sb-lbl{
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text3);
+  padding:0 1.1rem .45rem;
+}
+.sb-link{
+  display:flex;align-items:center;gap:.55rem;
+  padding:.5rem 1.1rem;color:var(--text2);
+  font-size:.845rem;font-weight:500;
+  transition:all var(--trans);cursor:pointer;
+  position:relative;
+}
+.sb-link:hover{color:var(--text);background:var(--surface)}
+.sb-link.active{color:var(--accent);background:rgba(0,212,180,.07)}
+.sb-link.active::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:var(--accent);border-radius:0 2px 2px 0;
+}
+.sb-link .ico{width:17px;text-align:center;flex-shrink:0;font-style:normal}
+.badge{
+  margin-left:auto;font-size:.62rem;font-weight:700;
+  padding:2px 6px;border-radius:10px;
+}
+.badge-new{background:rgba(0,212,180,.13);color:var(--accent)}
+.badge-hot{background:rgba(245,166,35,.13);color:var(--amber)}
+
+/* ══ MAIN ══ */
+.main{flex:1;margin-left:var(--side-w);padding:2.25rem;min-height:calc(100vh - var(--nav-h))}
+
+/* ══ PAGE ══ */
+.page{display:none;animation:fadeUp .4s cubic-bezier(.4,0,.2,1)}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ HERO ══ */
+.hero{
+  position:relative;overflow:hidden;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:3.5rem 2.75rem;
+  margin-bottom:2rem;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 75% 50%,rgba(0,212,180,.09) 0%,transparent 55%),
+    radial-gradient(ellipse at 20% 80%,rgba(74,158,255,.06) 0%,transparent 50%);
+}
+.hero-wrap{
+  display:grid;grid-template-columns:1fr auto;
+  gap:1.5rem;align-items:center;position:relative;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:rgba(0,212,180,.1);border:1px solid rgba(0,212,180,.25);
+  color:var(--accent);font-size:.75rem;font-weight:700;
+  padding:.28rem .75rem;border-radius:20px;margin-bottom:.9rem;
+}
+.hero h1{
+  font-size:clamp(1.75rem,3.8vw,2.9rem);
+  font-weight:800;line-height:1.15;margin-bottom:.85rem;
+}
+.hero h1 .grad{
+  background:linear-gradient(135deg,var(--accent),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero p{color:var(--text2);font-size:1rem;max-width:500px;margin-bottom:1.35rem;line-height:1.65}
+.hero-btns{display:flex;gap:.6rem;flex-wrap:wrap}
+.code-preview{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:1.1rem 1.35rem;
+  font-family:var(--font-m);font-size:.78rem;min-width:210px;
+}
+.cp-row{display:flex;gap:.65rem;margin-bottom:.28rem}
+.cp-ln{color:var(--text3);min-width:14px;user-select:none}
+.cp-out{margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border);color:var(--green);font-size:.78rem}
+.kw{color:var(--purple)} .fn{color:var(--accent)} .str{color:var(--amber)} .cm{color:var(--text3)} .num{color:var(--pink)}
+
+/* ══ STATS ══ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-bottom:2rem}
+.stat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.1rem 1.25rem;
+  display:flex;align-items:center;gap:.85rem;
+  cursor:pointer;transition:all var(--trans);
+}
+.stat:hover{border-color:var(--accent);transform:translateY(-2px)}
+.stat-ico{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.05rem;flex-shrink:0;
+}
+.stat-n{font-family:var(--font-d);font-size:1.35rem;font-weight:800}
+.stat-l{font-size:.75rem;color:var(--text2);margin-top:.08rem}
+
+/* ══ SECTION HEAD ══ */
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.sh h2{font-size:1.18rem;font-weight:700}
+.sh a{font-size:.8rem;color:var(--accent);cursor:pointer}
+
+/* ══ GRID ══ */
+.g{display:grid;gap:.9rem}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.mb{margin-bottom:2rem}
+
+/* ══ CARD ══ */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:1.35rem;
+  transition:all var(--trans);cursor:pointer;position:relative;overflow:hidden;
+}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--glow)}
+.card-ico{
+  width:42px;height:42px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:.65rem;
+}
+.card h3{font-size:.95rem;font-weight:700;margin-bottom:.35rem}
+.card p{font-size:.82rem;color:var(--text2);line-height:1.55}
+.card-foot{
+  display:flex;align-items:center;gap:.85rem;
+  margin-top:.85rem;padding-top:.7rem;
+  border-top:1px solid var(--border);
+  font-size:.75rem;color:var(--text3);
+}
+.card-foot span{display:flex;align-items:center;gap:.25rem}
+
+/* Tags */
+.tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:.65rem}
+.tag-b{background:rgba(34,197,94,.11);color:var(--green)}
+.tag-i{background:rgba(245,166,35,.11);color:var(--amber)}
+.tag-a{background:rgba(255,87,87,.11);color:var(--red)}
+.tag-p{background:rgba(0,212,180,.11);color:var(--accent)}
+.tag-w{background:rgba(155,114,255,.11);color:var(--purple)}
+.tag-all{background:rgba(74,158,255,.11);color:var(--blue)}
+
+/* ══ PROGRESS ══ */
+.prog{margin-top:.65rem}
+.prog-lbl{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text3);margin-bottom:.25rem}
+.prog-bar{height:3px;background:var(--bg);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--blue));transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+/* ══ CODE BLOCK ══ */
+.cb{background:var(--bg);border:1px solid var(--border2);border-radius:var(--radius);overflow:hidden;margin:1rem 0}
+.cb-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.45rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);
+}
+.cb-lang{font-size:.7rem;font-weight:700;color:var(--accent);font-family:var(--font-m)}
+.cb-copy{font-size:.7rem;color:var(--text3);background:none;border:none;cursor:pointer;transition:color var(--trans)}
+.cb-copy:hover{color:var(--accent)}
+.cb pre{
+  padding:1.15rem;font-family:var(--font-m);font-size:.8rem;
+  line-height:1.65;overflow-x:auto;color:var(--text);
+}
+
+/* ══ LESSON ══ */
+.les-wrap{display:grid;grid-template-columns:1fr 320px;gap:1.25rem;align-items:start}
+.les-main{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.les-header{padding:1.75rem 2.25rem;border-bottom:1px solid var(--border);background:var(--bg2)}
+.les-header h1{font-size:1.45rem;font-weight:800;margin-bottom:.45rem}
+.les-header p{color:var(--text2);font-size:.875rem}
+.les-meta{display:flex;gap:1rem;margin-top:.65rem;font-size:.78rem;color:var(--text3)}
+.les-body{padding:1.75rem 2.25rem}
+.les-body h2{font-size:1.05rem;font-weight:700;margin:1.35rem 0 .65rem;color:var(--accent)}
+.les-body h3{font-size:.92rem;font-weight:700;margin:.9rem 0 .4rem}
+.les-body p{color:var(--text2);font-size:.875rem;line-height:1.75;margin-bottom:.65rem}
+.les-body ul{margin:.45rem 0 .65rem 1.2rem}
+.les-body ul li{color:var(--text2);font-size:.875rem;margin-bottom:.28rem;list-style:disc}
+.les-body li strong{color:var(--text)}
+.les-nav{display:flex;justify-content:space-between;gap:1rem;padding:1.35rem 2.25rem;border-top:1px solid var(--border)}
+.les-aside{position:sticky;top:calc(var(--nav-h) + 1.25rem)}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem;margin-bottom:.9rem}
+.toc h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.65rem}
+.toc-a{display:block;font-size:.82rem;color:var(--text2);padding:.32rem .55rem;border-radius:6px;margin-bottom:.08rem;transition:all var(--trans);cursor:pointer}
+.toc-a:hover,.toc-a.active{color:var(--accent);background:rgba(0,212,180,.08)}
+.toc-a.active{font-weight:600}
+
+/* ══ INFO BOX ══ */
+.ib{border-radius:var(--radius-sm);padding:.85rem 1.1rem;border-left:3px solid;margin:.85rem 0}
+.ib.tip{background:rgba(0,212,180,.055);border-color:var(--accent)}
+.ib.note{background:rgba(74,158,255,.055);border-color:var(--blue)}
+.ib.warn{background:rgba(245,166,35,.055);border-color:var(--amber)}
+.ib strong{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+.ib p{font-size:.85rem;color:var(--text2);margin:.28rem 0 0}
+
+/* ══ ROADMAP ══ */
+.rm-wrap{position:relative}
+.rm-track{position:absolute;left:21px;top:0;bottom:0;width:2px;background:var(--border2)}
+.rm-item{display:flex;gap:1.35rem;margin-bottom:1.35rem;opacity:0;transform:translateX(-18px);animation:slideIn .5s forwards}
+@keyframes slideIn{to{opacity:1;transform:translateX(0)}}
+.rm-item:nth-child(1){animation-delay:.05s}.rm-item:nth-child(2){animation-delay:.12s}
+.rm-item:nth-child(3){animation-delay:.18s}.rm-item:nth-child(4){animation-delay:.24s}
+.rm-item:nth-child(5){animation-delay:.3s}.rm-item:nth-child(6){animation-delay:.36s}
+.rm-item:nth-child(7){animation-delay:.42s}.rm-item:nth-child(8){animation-delay:.48s}
+.rm-item:nth-child(9){animation-delay:.54s}
+.rm-dot{width:44px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;padding-top:.15rem}
+.rm-circle{
+  width:42px;height:42px;border-radius:50%;
+  border:2px solid var(--border2);background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;transition:all var(--trans);z-index:1;
+}
+.rm-item.done .rm-circle{border-color:var(--accent);background:rgba(0,212,180,.09);box-shadow:0 0 14px rgba(0,212,180,.3)}
+.rm-item.curr .rm-circle{border-color:var(--amber);background:rgba(245,166,35,.09);box-shadow:0 0 14px rgba(245,166,35,.3);animation:pulseAmber 2s infinite}
+@keyframes pulseAmber{0%,100%{box-shadow:0 0 14px rgba(245,166,35,.3)}50%{box-shadow:0 0 22px rgba(245,166,35,.6)}}
+.rm-body{flex:1}
+.rm-status{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.28rem}
+.s-done{color:var(--green)}.s-curr{color:var(--amber)}.s-lock{color:var(--text3)}
+.rm-body .card{cursor:default}.rm-body .card:hover{transform:none;box-shadow:none;border-color:var(--border)}
+.rm-body .card.clickable{cursor:pointer}.rm-body .card.clickable:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--glow)}
+.rm-body h3{font-size:.92rem;font-weight:700;margin-bottom:.28rem}
+.rm-body p{font-size:.8rem;color:var(--text2)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem}
+.chip{background:var(--bg);border:1px solid var(--border);font-size:.7rem;padding:2px 9px;border-radius:20px;color:var(--text2)}
+
+/* ══ DASHBOARD ══ */
+.dash-grid{display:grid;grid-template-columns:1fr 320px;gap:1.25rem;align-items:start}
+.ring-wrap{position:relative;width:110px;height:110px;margin:0 auto .85rem}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-xp{font-family:var(--font-d);font-size:1.3rem;font-weight:800}
+.ring-lbl{font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.07em}
+.streak-c{background:linear-gradient(135deg,rgba(245,166,35,.1),rgba(255,107,157,.08));border:1px solid rgba(245,166,35,.2);border-radius:var(--radius);padding:1.1rem;margin-bottom:.85rem}
+.streak-n{font-family:var(--font-d);font-size:1.85rem;font-weight:800;color:var(--amber)}
+
+/* ══ QUIZ ══ */
+.qz-q{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:.85rem}
+.qz-txt{font-size:.975rem;font-weight:600;margin-bottom:1.1rem;line-height:1.5}
+.qz-opts{display:flex;flex-direction:column;gap:.55rem}
+.qz-opt{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.7rem .95rem;text-align:left;color:var(--text);font-size:.855rem;transition:all var(--trans)}
+.qz-opt:hover{border-color:var(--accent);background:rgba(0,212,180,.05)}
+.qz-opt.correct{border-color:var(--green)!important;background:rgba(34,197,94,.08)!important;color:var(--green)!important}
+.qz-opt.wrong{border-color:var(--red)!important;background:rgba(255,87,87,.08)!important;color:var(--red)!important}
+
+/* ══ TABS ══ */
+.tabs{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.35rem}
+.tab{padding:.44rem 1rem;border-radius:40px;font-size:.8rem;font-weight:600;background:none;border:1px solid var(--border);color:var(--text2);transition:all var(--trans)}
+.tab:hover{border-color:var(--accent);color:var(--accent)}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#080c18}
+
+/* ══ SEARCH RESULTS ══ */
+.sr-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.sr-item{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.35rem;border-bottom:1px solid var(--border);transition:background var(--trans);cursor:pointer}
+.sr-item:last-child{border-bottom:none}
+.sr-item:hover{background:var(--surface2)}
+.sr-ico{width:34px;height:34px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.sr-info h4{font-size:.875rem;font-weight:600;margin-bottom:.15rem}
+.sr-info p{font-size:.75rem;color:var(--text3)}
+
+/* ══ CAREER ══ */
+.career-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;margin-bottom:.9rem}
+.career-card h3{font-size:1rem;font-weight:700;margin-bottom:.45rem}
+.career-card > p{font-size:.83rem;color:var(--text2);margin-bottom:.9rem}
+.career-steps{display:flex;align-items:center;flex-wrap:wrap;gap:0}
+.c-step{display:flex;align-items:center}
+.c-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:.5rem .85rem;font-size:.75rem;font-weight:600;text-align:center;min-width:90px}
+.c-box.start{background:rgba(0,212,180,.1);border-color:var(--accent)}
+.c-box.end{background:rgba(245,166,35,.1);border-color:var(--amber)}
+.c-arr{color:var(--accent);padding:0 .35rem;font-size:.9rem}
+
+/* ══ TABLE ══ */
+table{width:100%;border-collapse:collapse}
+th,td{padding:.7rem .95rem;text-align:left;border-bottom:1px solid var(--border);font-size:.855rem}
+th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;letter-spacing:.05em}
+
+/* ══ TOAST ══ */
+.toast{
+  position:fixed;bottom:1.35rem;right:1.35rem;z-index:3000;
+  background:var(--surface);border:1px solid var(--accent);
+  border-radius:var(--radius);padding:.8rem 1.1rem;
+  display:flex;align-items:center;gap:.5rem;
+  box-shadow:var(--shadow);font-size:.855rem;
+  transform:translateY(70px);opacity:0;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ══ FOOTER ══ */
+.footer{
+  margin-left:var(--side-w);padding:1.75rem 2.25rem;
+  border-top:1px solid var(--border);background:var(--bg2);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.9rem;font-size:.79rem;color:var(--text3);
+}
+
+/* ══ NOTES PANEL ══ */
+.notes-panel {
+  position:fixed;top:0;right:-400px;width:380px;height:100vh;
+  background:var(--bg2);border-left:1px solid var(--border);
+  z-index:2000;transition:right var(--trans);
+  display:flex;flex-direction:column;box-shadow:-5px 0 30px rgba(0,0,0,.5);
+}
+.notes-panel.open { right:0; }
+.np-head {
+  padding:1.25rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.np-body { flex:1;overflow-y:auto;padding:1.25rem; }
+.np-foot { padding:1.25rem;border-top:1px solid var(--border); }
+.note-item {
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:.85rem;margin-bottom:.85rem;
+  position:relative;
+}
+.note-title { font-size:.9rem;font-weight:700;margin-bottom:.3rem;color:var(--accent); }
+.note-content { font-size:.8rem;color:var(--text);white-space:pre-wrap; }
+.note-meta { font-size:.7rem;color:var(--text3);margin-top:.5rem; }
+.note-del {
+  position:absolute;top:.5rem;right:.5rem;background:none;border:none;
+  color:var(--red);cursor:pointer;font-size:1.1rem;opacity:.6;
+}
+.note-del:hover { opacity:1; }
+.note-input {
+  width:100%;background:var(--surface);border:1px solid var(--border);
+  color:var(--text);border-radius:var(--radius-sm);padding:.6rem;
+  font-family:var(--font-b);margin-bottom:.5rem;resize:vertical;
+}
+.note-input:focus { border-color:var(--accent);outline:none; }
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .les-wrap,.dash-grid{grid-template-columns:1fr}
+  .les-aside{position:static}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0);box-shadow:4px 0 30px rgba(0,0,0,.4)}
+  .main,.footer{margin-left:0}
+  .burger{display:flex}
+  .hero-wrap{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .g3{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .main{padding:1.1rem .9rem}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .nav-search{display:none}
+  .hero{padding:1.75rem 1.1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar">
+  <button class="burger btn-icon" id="burger" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-logo" onclick="go('home')">
+    <div class="logo-box"></div>
+    CS<span class="hl">Academy</span>
+  </div>
+  <div class="nav-search">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search topics, languages, concepts…">
+    <button onclick="doSearch()" style="background:none;border:none;color:var(--accent);font-size:.78rem;cursor:pointer;font-weight:600">Go</button>
+  </div>
+  <div class="nav-actions">
+    <div class="xp-pill" onclick="go('dashboard')">
+      <span>⚡</span><span class="num xp-show">0</span><span style="color:var(--text3)">XP</span>
+    </div>
+    <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">☀️</button>
+    <button class="btn btn-primary" onclick="go('roadmap')">🗺️ Roadmap</button>
+  </div>
+</nav>
+
+<!-- ═══════════ LAYOUT ═══════════ -->
+<div class="layout">
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-sec">
+    <div class="sb-lbl">Navigation</div>
+    <div class="sb-link active" data-p="home" onclick="go('home')"><i class="ico">🏠</i> Home</div>
+    <div class="sb-link" data-p="dashboard" onclick="go('dashboard')"><i class="ico">📊</i> My Progress</div>
+    <div class="sb-link" data-p="roadmap" onclick="go('roadmap')"><i class="ico">🗺️</i> Learning Roadmap</div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Foundations</div>
+    <div class="sb-link" data-p="intro" onclick="go('intro')"><i class="ico">💻</i> Intro to CS <span class="badge badge-new">Start</span></div>
+    <div class="sb-link" data-p="fundamentals" onclick="go('fundamentals')"><i class="ico">🧠</i> Fundamentals</div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Languages</div>
+    <div class="sb-link" data-p="languages" onclick="go('languages')"><i class="ico">💻</i> All Languages</div>
+    <div class="sb-link" onclick="goLesson('html')"><i class="ico">🌐</i> HTML</div>
+    <div class="sb-link" onclick="goLesson('css')"><i class="ico">🎨</i> CSS</div>
+    <div class="sb-link" onclick="goLesson('javascript')"><i class="ico">⚡</i> JavaScript</div>
+    <div class="sb-link" onclick="goLesson('python')"><i class="ico">🐍</i> Python</div>
+    <div class="sb-link" onclick="goLesson('cpp')"><i class="ico">⚙️</i> C / C++</div>
+    <div class="sb-link" onclick="goLesson('java')"><i class="ico">☕</i> Java <span class="badge badge-hot">Hot</span></div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Advanced</div>
+    <div class="sb-link" data-p="webdev" onclick="go('webdev')"><i class="ico">🖥️</i> Web Development</div>
+    <div class="sb-link" data-p="practice" onclick="go('practice')"><i class="ico">💪</i> Practice</div>
+    <div class="sb-link" data-p="career" onclick="go('career')"><i class="ico">🚀</i> Career Guide</div>
+  </div>
+  <div class="sb-sec">
+    <div class="sb-lbl">Quick</div>
+    <div class="sb-link" onclick="toggleNotes()"><i class="ico">📝</i> My Notes</div>
+    <div class="sb-link" onclick="go('quiz')"><i class="ico">🎯</i> Quick Quiz</div>
+    <div class="sb-link" onclick="doSearch('')"><i class="ico">🔍</i> Browse All</div>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN CONTENT ═══════════ -->
+<main class="main">
+
+<!-- ───────── HOME ───────── -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-wrap">
+      <div>
+        <div class="hero-badge">🎓 Free · Beginner to Advanced · Hindi-friendly explanations</div>
+        <h1>Learn <span class="grad">Computer Science</span><br>from Zero to Advanced</h1>
+        <p>Complete journey from "What is a computer?" to building full-stack apps, AI projects, and landing your first developer job. Designed for Class 12 and college students.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="go('roadmap')">🗺️ Start Learning Path</button>
+          <button class="btn btn-ghost" onclick="go('intro')">📖 Intro to CS</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="code-preview">
+          <div class="cp-row"><span class="cp-ln">1</span><span class="cm"># Python — first program</span></div>
+          <div class="cp-row"><span class="cp-ln">2</span><span><span class="kw">def</span> <span class="fn">greet</span>(name):</span></div>
+          <div class="cp-row"><span class="cp-ln">3</span><span>&nbsp;&nbsp;<span class="fn">print</span>(<span class="str">f"Hello, {name}!"</span>)</span></div>
+          <div class="cp-row"><span class="cp-ln">4</span><span></span></div>
+          <div class="cp-row"><span class="cp-ln">5</span><span><span class="fn">greet</span>(<span class="str">"World"</span>)</span></div>
+          <div class="cp-out">▶ Hello, World!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat" onclick="go('intro')">
+      <div class="stat-ico" style="background:rgba(0,212,180,.11);color:var(--accent)">📚</div>
+      <div><div class="stat-n">50+</div><div class="stat-l">Free Lessons</div></div>
+    </div>
+    <div class="stat" onclick="go('languages')">
+      <div class="stat-ico" style="background:rgba(74,158,255,.11);color:var(--blue)">💻</div>
+      <div><div class="stat-n">7</div><div class="stat-l">Languages</div></div>
+    </div>
+    <div class="stat" onclick="go('practice')">
+      <div class="stat-ico" style="background:rgba(245,166,35,.11);color:var(--amber)">🎯</div>
+      <div><div class="stat-n">30+</div><div class="stat-l">Exercises</div></div>
+    </div>
+    <div class="stat" onclick="go('career')">
+      <div class="stat-ico" style="background:rgba(155,114,255,.11);color:var(--purple)">🚀</div>
+      <div><div class="stat-n">5</div><div class="stat-l">Career Paths</div></div>
+    </div>
+  </div>
+
+  <div class="sh"><h2>🌟 Start Here — Beginner Track</h2><a onclick="go('roadmap')">Full roadmap →</a></div>
+  <div class="g g3 mb">
+    <div class="card" onclick="go('intro')">
+      <div class="card-ico" style="background:rgba(0,212,180,.1)">💻</div>
+      <span class="tag tag-b">Beginner</span><h3>Introduction to CS</h3>
+      <p>What is a computer? What is code? How does software work? Start here — zero knowledge needed.</p>
+      <div class="card-foot"><span>📖 4 lessons</span><span>⏱️ 30 min</span><span style="color:var(--accent)">Free →</span></div>
+    </div>
+    <div class="card" onclick="go('fundamentals')">
+      <div class="card-ico" style="background:rgba(74,158,255,.1)">🧠</div>
+      <span class="tag tag-b">Beginner</span><h3>Programming Fundamentals</h3>
+      <p>Logic building, algorithms, flowcharts & problem solving — skills every developer must have.</p>
+      <div class="card-foot"><span>📖 6 lessons</span><span>⏱️ 45 min</span><span style="color:var(--accent)">Free →</span></div>
+    </div>
+    <div class="card" onclick="goLesson('html')">
+      <div class="card-ico" style="background:rgba(245,166,35,.1)">🌐</div>
+      <span class="tag tag-b">Beginner</span><h3>HTML — Build Web Pages</h3>
+      <p>Create your first webpage today. Tags, links, images, forms — the building blocks of the web.</p>
+      <div class="card-foot"><span>📖 8 lessons</span><span>⏱️ 60 min</span><span style="color:var(--accent)">Free →</span></div>
+    </div>
+  </div>
+
+  <div class="sh"><h2>💻 All Programming Languages</h2><a onclick="go('languages')">View all →</a></div>
+  <div class="g g4 mb">
+    <div class="card" onclick="goLesson('html')"><div style="font-size:1.85rem;margin-bottom:.45rem">🌐</div><h3>HTML</h3><p style="font-size:.8rem;color:var(--text2)">Web structure</p><span class="tag tag-b" style="margin:0">Beginner</span></div>
+    <div class="card" onclick="goLesson('css')"><div style="font-size:1.85rem;margin-bottom:.45rem">🎨</div><h3>CSS</h3><p style="font-size:.8rem;color:var(--text2)">Design & layout</p><span class="tag tag-b" style="margin:0">Beginner</span></div>
+    <div class="card" onclick="goLesson('javascript')"><div style="font-size:1.85rem;margin-bottom:.45rem">⚡</div><h3>JavaScript</h3><p style="font-size:.8rem;color:var(--text2)">Web interactivity</p><span class="tag tag-i" style="margin:0">Intermediate</span></div>
+    <div class="card" onclick="goLesson('python')"><div style="font-size:1.85rem;margin-bottom:.45rem">🐍</div><h3>Python</h3><p style="font-size:.8rem;color:var(--text2)">AI, data, scripts</p><span class="tag tag-b" style="margin:0">Beginner</span></div>
+    <div class="card" onclick="goLesson('cpp')"><div style="font-size:1.85rem;margin-bottom:.45rem">⚙️</div><h3>C / C++</h3><p style="font-size:.8rem;color:var(--text2)">Systems & speed</p><span class="tag tag-i" style="margin:0">Intermediate</span></div>
+    <div class="card" onclick="goLesson('java')"><div style="font-size:1.85rem;margin-bottom:.45rem">☕</div><h3>Java</h3><p style="font-size:.8rem;color:var(--text2)">Enterprise & Android</p><span class="tag tag-i" style="margin:0">Intermediate</span></div>
+    <div class="card" onclick="go('webdev')"><div style="font-size:1.85rem;margin-bottom:.45rem">🔧</div><h3>Node.js</h3><p style="font-size:.8rem;color:var(--text2)">Backend JS</p><span class="tag tag-a" style="margin:0">Advanced</span></div>
+    <div class="card" onclick="go('webdev')"><div style="font-size:1.85rem;margin-bottom:.45rem">🗄️</div><h3>SQL</h3><p style="font-size:.8rem;color:var(--text2)">Databases</p><span class="tag tag-i" style="margin:0">Intermediate</span></div>
+  </div>
+
+  <div class="sh"><h2>🔥 Popular Lessons</h2><a onclick="doSearch('')">Browse all →</a></div>
+  <div class="g g2 mb">
+    <div class="card" onclick="goLesson('intro-computer')"><span class="tag tag-b">Beginner</span><h3>💻 What is a Computer?</h3><p>Hardware, software, CPU, RAM, storage — understand the machine powering the digital world.</p><div class="card-foot"><span>⏱️ 10 min</span><span>⭐ 50 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="goLesson('intro-programming')"><span class="tag tag-b">Beginner</span><h3>⌨️ What is Programming?</h3><p>Discover what programming really is, why to learn it, and write your very first program today.</p><div class="card-foot"><span>⏱️ 10 min</span><span>⭐ 50 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="goLesson('fund-algo')"><span class="tag tag-b">Beginner</span><h3>📐 Algorithms</h3><p>Break problems into steps. Learn sorting, searching, and Big O — the foundation of coding interviews.</p><div class="card-foot"><span>⏱️ 15 min</span><span>⭐ 80 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="goLesson('python')"><span class="tag tag-b">Beginner</span><h3>🐍 Python for Beginners</h3><p>Variables, loops, functions, lists — the most beginner-friendly language, used in AI and web dev.</p><div class="card-foot"><span>⏱️ 20 min</span><span>⭐ 120 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+  </div>
+
+  <div class="g g2">
+    <div class="card" style="background:linear-gradient(135deg,rgba(0,212,180,.07),rgba(74,158,255,.05));border-color:rgba(0,212,180,.18)" onclick="go('practice')">
+      <div style="font-size:1.85rem;margin-bottom:.45rem">💪</div><h3>Practice & Projects</h3>
+      <p>Coding exercises, mini projects, and quizzes to solidify your skills. Learn by building.</p>
+      <button class="btn btn-primary" style="margin-top:.85rem">Start Practicing</button>
+    </div>
+    <div class="card" style="background:linear-gradient(135deg,rgba(245,166,35,.07),rgba(255,107,157,.05));border-color:rgba(245,166,35,.18)" onclick="go('career')">
+      <div style="font-size:1.85rem;margin-bottom:.45rem">🚀</div><h3>Career Guidance</h3>
+      <p>Roadmaps for Web Dev, AI, Data Science. Get your first developer job step by step.</p>
+      <button class="btn btn-amber" style="margin-top:.85rem">Explore Careers</button>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── INTRO TO CS ───────── -->
+<section class="page" id="page-intro">
+  <div class="sh"><div><div style="font-size:.73rem;color:var(--text3);margin-bottom:.2rem">Module 1 of 6</div><h2>💻 Introduction to Computer Science</h2></div></div>
+  <p style="color:var(--text2);margin-bottom:1.35rem;font-size:.875rem">Start from absolute zero. No prior knowledge needed. Understand what computers are and how the digital world works.</p>
+  <div class="g g2 mb">
+    <div class="card" onclick="goLesson('intro-computer')"><span class="tag tag-b">Lesson 1</span><div class="card-ico" style="background:rgba(0,212,180,.1)">💻</div><h3>What is a Computer?</h3><p>Hardware vs software, CPU, RAM, storage, types of computers, and the IPO model.</p><div class="card-foot"><span>⏱️ 10 min</span><span>⭐ 50 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="goLesson('intro-programming')"><span class="tag tag-b">Lesson 2</span><div class="card-ico" style="background:rgba(74,158,255,.1)">⌨️</div><h3>What is Programming?</h3><p>What code is, why you should learn it, how programs run from text to machine instructions.</p><div class="card-foot"><span>⏱️ 10 min</span><span>⭐ 50 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="toast('Lesson coming soon! 🚀')"><span class="tag tag-b">Lesson 3</span><div class="card-ico" style="background:rgba(245,166,35,.1)">📝</div><h3>What is Code?</h3><p>Explore programming languages, how code gets translated, compiled vs interpreted languages.</p><div class="card-foot"><span>⏱️ 10 min</span><span>⭐ 50 XP</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+    <div class="card" onclick="toast('Lesson coming soon! 🚀')"><span class="tag tag-b">Lesson 4</span><div class="card-ico" style="background:rgba(155,114,255,.1)">⚙️</div><h3>How Software Works</h3><p>From apps to OS — how software layers work, system calls, and how programs talk to hardware.</p><div class="card-foot"><span>⏱️ 12 min</span><span>⭐ 60 XP</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+  </div>
+</section>
+
+<!-- ───────── FUNDAMENTALS ───────── -->
+<section class="page" id="page-fundamentals">
+  <div class="sh"><div><div style="font-size:.73rem;color:var(--text3);margin-bottom:.2rem">Module 2 of 6</div><h2>🧠 Programming Fundamentals</h2></div></div>
+  <p style="color:var(--text2);margin-bottom:1.35rem;font-size:.875rem">Master the thinking skills every developer needs — before writing any code.</p>
+  <div class="g g2 mb">
+    <div class="card" onclick="goLesson('fund-logic')"><span class="tag tag-b">Lesson 1</span><div class="card-ico" style="background:rgba(0,212,180,.1)">🧠</div><h3>Logic Building</h3><p>Boolean logic, AND/OR/NOT gates, decision trees, truth tables — the brain of programming.</p><div class="card-foot"><span>⏱️ 15 min</span><span>⭐ 70 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="goLesson('fund-algo')"><span class="tag tag-b">Lesson 2</span><div class="card-ico" style="background:rgba(74,158,255,.1)">📐</div><h3>Algorithms</h3><p>Step-by-step problem solving, searching, sorting, and measuring efficiency with Big O notation.</p><div class="card-foot"><span>⏱️ 20 min</span><span>⭐ 80 XP</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card" onclick="toast('Flowcharts lesson coming soon!')"><span class="tag tag-b">Lesson 3</span><div class="card-ico" style="background:rgba(245,166,35,.1)">📊</div><h3>Flowcharts</h3><p>Visualize your algorithm before coding. Learn standard symbols and diagram any program flow.</p><div class="card-foot"><span>⏱️ 15 min</span><span>⭐ 60 XP</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+    <div class="card" onclick="toast('Problem solving lesson coming soon!')"><span class="tag tag-i">Lesson 4</span><div class="card-ico" style="background:rgba(155,114,255,.1)">🔍</div><h3>Problem Solving</h3><p>Decomposition, pattern recognition, abstraction, and pseudocode — how top developers think.</p><div class="card-foot"><span>⏱️ 20 min</span><span>⭐ 80 XP</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+  </div>
+  <div class="ib note"><strong>📌 Why This Matters</strong><p>Most beginners rush to learn syntax without building problem-solving skills. Developers who master fundamentals write better code 10x faster — and ace technical interviews.</p></div>
+</section>
+
+<!-- ───────── LANGUAGES ───────── -->
+<section class="page" id="page-languages">
+  <div class="sh"><h2>💻 Programming Languages</h2></div>
+  <p style="color:var(--text2);margin-bottom:1.35rem;font-size:.875rem">Start with HTML+CSS, then Python, then JavaScript. Each has beginner-to-advanced coverage.</p>
+  <div class="tabs">
+    <button class="tab active" onclick="filterLang('all',this)">All</button>
+    <button class="tab" onclick="filterLang('web',this)">Web (HTML/CSS/JS)</button>
+    <button class="tab" onclick="filterLang('general',this)">General Purpose</button>
+    <button class="tab" onclick="filterLang('advanced',this)">Advanced</button>
+  </div>
+  <div class="g g2" id="lang-grid">
+    <div class="card lc web" onclick="goLesson('html')"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem"><div class="card-ico" style="background:rgba(245,166,35,.12);margin:0;font-size:1.4rem">🌐</div><div><h3>HTML</h3><span class="tag tag-b">Beginner Friendly</span></div></div><p>The foundation of every webpage — tags, elements, forms, tables, semantic HTML5. Build your first page today.</p><div class="prog"><div class="prog-lbl"><span>Progress</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div><div class="card-foot"><span>📖 12 lessons</span><span>⏱️ 3 hrs</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card lc web" onclick="goLesson('css')"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem"><div class="card-ico" style="background:rgba(74,158,255,.12);margin:0;font-size:1.4rem">🎨</div><div><h3>CSS</h3><span class="tag tag-b">Beginner Friendly</span></div></div><p>Style and design beautiful websites. Flexbox, Grid, animations, media queries, CSS variables.</p><div class="prog"><div class="prog-lbl"><span>Progress</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div><div class="card-foot"><span>📖 14 lessons</span><span>⏱️ 4 hrs</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card lc web" onclick="goLesson('javascript')"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem"><div class="card-ico" style="background:rgba(245,166,35,.12);margin:0;font-size:1.4rem">⚡</div><div><h3>JavaScript</h3><span class="tag tag-i">Intermediate</span></div></div><p>The language of the web. DOM, events, fetch API, ES6+, async/await. Make pages interactive.</p><div class="prog"><div class="prog-lbl"><span>Progress</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div><div class="card-foot"><span>📖 20 lessons</span><span>⏱️ 8 hrs</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card lc general" onclick="goLesson('python')"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem"><div class="card-ico" style="background:rgba(0,212,180,.12);margin:0;font-size:1.4rem">🐍</div><div><h3>Python</h3><span class="tag tag-b">Best for Beginners</span></div></div><p>The #1 first language. Clean syntax, AI/ML/web dev use. Variables, loops, OOP, file handling.</p><div class="prog"><div class="prog-lbl"><span>Progress</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div><div class="card-foot"><span>📖 18 lessons</span><span>⏱️ 6 hrs</span><span style="color:var(--accent)">Start →</span></div></div>
+    <div class="card lc general advanced" onclick="goLesson('cpp')"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem"><div class="card-ico" style="background:rgba(155,114,255,.12);margin:0;font-size:1.4rem">⚙️</div><div><h3>C / C++</h3><span class="tag tag-i">Intermediate</span></div></div><p>Master fundamentals. Pointers, memory management, data structures — essential for competitive programming.</p><div class="prog"><div class="prog-lbl"><span>Progress</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div><div class="card-foot"><span>📖 22 lessons</span><span>⏱️ 10 hrs</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+    <div class="card lc general advanced" onclick="goLesson('java')"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem"><div class="card-ico" style="background:rgba(255,87,87,.12);margin:0;font-size:1.4rem">☕</div><div><h3>Java</h3><span class="tag tag-i">Intermediate</span></div></div><p>OOP, JVM, Spring. Essential for Android development and enterprise backend systems.</p><div class="prog"><div class="prog-lbl"><span>Progress</span><span>0%</span></div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div><div class="card-foot"><span>📖 20 lessons</span><span>⏱️ 8 hrs</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+  </div>
+</section>
+
+<!-- ───────── WEB DEV ───────── -->
+<section class="page" id="page-webdev">
+  <div class="sh"><h2>🖥️ Web Development</h2></div>
+  <p style="color:var(--text2);margin-bottom:1.35rem;font-size:.875rem">From static pages to full-stack applications. Build real websites and web apps.</p>
+  <div class="g g2 mb">
+    <div class="card" onclick="toast('Frontend module coming soon!')"><span class="tag tag-i">Frontend</span><div class="card-ico" style="background:rgba(74,158,255,.1)">🖥️</div><h3>Frontend Development</h3><p>Build beautiful, responsive UIs. HTML, CSS, JavaScript, and React.js for modern web apps.</p><ul style="font-size:.8rem;color:var(--text2);margin:.6rem 0 0 1.1rem;list-style:disc;line-height:1.8"><li>HTML5 &amp; CSS3 mastery</li><li>Responsive &amp; mobile-first</li><li>JavaScript DOM manipulation</li><li>React.js fundamentals</li><li>Git &amp; GitHub</li></ul><div class="card-foot"><span>📖 24 lessons</span><span>⏱️ 12 hrs</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+    <div class="card" onclick="toast('Backend module coming soon!')"><span class="tag tag-a">Backend</span><div class="card-ico" style="background:rgba(155,114,255,.1)">🔧</div><h3>Backend Development</h3><p>Build server-side logic with Node.js, Python Flask/Django, and REST APIs.</p><ul style="font-size:.8rem;color:var(--text2);margin:.6rem 0 0 1.1rem;list-style:disc;line-height:1.8"><li>Node.js &amp; Express.js</li><li>Python Flask &amp; Django</li><li>REST API design</li><li>Authentication &amp; Security (JWT)</li><li>Server deployment (Render, Railway)</li></ul><div class="card-foot"><span>📖 20 lessons</span><span>⏱️ 10 hrs</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+    <div class="card" onclick="toast('Databases module coming soon!')"><span class="tag tag-i">Databases</span><div class="card-ico" style="background:rgba(0,212,180,.1)">🗄️</div><h3>Databases</h3><p>Store and query data efficiently. SQL, MySQL, PostgreSQL, and MongoDB (NoSQL).</p><ul style="font-size:.8rem;color:var(--text2);margin:.6rem 0 0 1.1rem;list-style:disc;line-height:1.8"><li>SQL — SELECT, JOIN, GROUP BY</li><li>Database design &amp; normalization</li><li>MySQL &amp; PostgreSQL</li><li>MongoDB &amp; Mongoose</li><li>Database security &amp; indexing</li></ul><div class="card-foot"><span>📖 16 lessons</span><span>⏱️ 8 hrs</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+    <div class="card" onclick="toast('APIs module coming soon!')"><span class="tag tag-a">APIs</span><div class="card-ico" style="background:rgba(245,166,35,.1)">🔌</div><h3>APIs &amp; REST</h3><p>Connect applications together. Build and consume REST APIs, HTTP methods, JSON, auth.</p><ul style="font-size:.8rem;color:var(--text2);margin:.6rem 0 0 1.1rem;list-style:disc;line-height:1.8"><li>HTTP methods (GET, POST, PUT, DELETE)</li><li>JSON &amp; API design</li><li>Authentication (JWT, OAuth2)</li><li>Postman &amp; API testing</li><li>Third-party APIs (weather, maps, payment)</li></ul><div class="card-foot"><span>📖 12 lessons</span><span>⏱️ 6 hrs</span><span style="color:var(--amber)">Coming Soon</span></div></div>
+  </div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(0,212,180,.06),rgba(74,158,255,.06));border-color:rgba(0,212,180,.2);cursor:default">
+    <h3>🚀 Capstone: Build a Full-Stack Web App</h3>
+    <p style="color:var(--text2);margin:.45rem 0 .9rem;font-size:.875rem">After completing all web dev modules, you'll build a complete app with React frontend, Node.js backend, and MongoDB database — deployed live to the internet.</p>
+    <button class="btn btn-primary" onclick="toast('Capstone project coming soon! 🚀')">View Project Details</button>
+  </div>
+</section>
+
+<!-- ───────── PRACTICE ───────── -->
+<section class="page" id="page-practice">
+  <div class="sh"><h2>💪 Practice &amp; Projects</h2></div>
+  <p style="color:var(--text2);margin-bottom:1.35rem;font-size:.875rem">Coding is learned by doing. Exercises, projects, and quizzes to make skills stick.</p>
+  <div class="sh"><h2>🎯 Knowledge Quizzes</h2></div>
+  <div class="g g3 mb">
+    <div class="card" onclick="goQuiz('general')"><div style="font-size:1.85rem;margin-bottom:.45rem">🎯</div><span class="tag tag-p">Quiz</span><h3>General CS Quiz</h3><p>Test knowledge across all topics — computers, programming, algorithms.</p><div class="card-foot"><span>❓ 5 questions</span><span>⭐ 100 XP</span></div></div>
+    <div class="card" onclick="goQuiz('html')"><div style="font-size:1.85rem;margin-bottom:.45rem">🌐</div><span class="tag tag-p">Quiz</span><h3>HTML Quiz</h3><p>Test your HTML tags, attributes and structure knowledge.</p><div class="card-foot"><span>❓ 5 questions</span><span>⭐ 100 XP</span></div></div>
+    <div class="card" onclick="goQuiz('python')"><div style="font-size:1.85rem;margin-bottom:.45rem">🐍</div><span class="tag tag-p">Quiz</span><h3>Python Quiz</h3><p>Test Python fundamentals — syntax, loops, functions, lists.</p><div class="card-foot"><span>❓ 5 questions</span><span>⭐ 100 XP</span></div></div>
+  </div>
+  <div class="sh"><h2>🔨 Mini Projects</h2></div>
+  <div class="g g2 mb">
+    <div class="card"><span class="tag tag-b">Beginner</span><h3>📄 Personal Portfolio Website</h3><p>Build your own portfolio with HTML &amp; CSS — showcase who you are and what you're learning.</p><div style="margin:.65rem 0;font-size:.8rem;color:var(--text2)"><strong>Skills:</strong> HTML, CSS, Flexbox, Responsive Design</div><button class="btn btn-primary" onclick="toast('Portfolio guide: Create index.html, style.css. Add sections for About, Skills, Projects, Contact.')">Get Started</button></div>
+    <div class="card"><span class="tag tag-b">Beginner</span><h3>🧮 Calculator App</h3><p>Build a working calculator with HTML, CSS, and JavaScript — all arithmetic operations.</p><div style="margin:.65rem 0;font-size:.8rem;color:var(--text2)"><strong>Skills:</strong> HTML, CSS, JavaScript, Functions</div><button class="btn btn-primary" onclick="toast('Calculator: Use buttons with onclick, eval() or manual parsing for operations.')">Get Started</button></div>
+    <div class="card"><span class="tag tag-i">Intermediate</span><h3>✅ To-Do List App</h3><p>Full to-do list with add, complete, delete. Store data in localStorage — survives page refresh.</p><div style="margin:.65rem 0;font-size:.8rem;color:var(--text2)"><strong>Skills:</strong> JavaScript, DOM, localStorage, JSON</div><button class="btn btn-ghost" onclick="toast('To-Do: Use an array, save to localStorage, render from state on every change.')">Coming Soon</button></div>
+    <div class="card"><span class="tag tag-i">Intermediate</span><h3>🌤️ Weather App</h3><p>Fetch real weather data from OpenWeatherMap API and display it for any city in the world.</p><div style="margin:.65rem 0;font-size:.8rem;color:var(--text2)"><strong>Skills:</strong> JavaScript, Fetch API, JSON, API keys</div><button class="btn btn-ghost" onclick="toast('Weather: Use fetch() with OpenWeatherMap free API. Parse JSON response.')">Coming Soon</button></div>
+  </div>
+  <div class="sh"><h2>💡 Coding Exercises</h2></div>
+  <div class="card">
+    <table>
+      <thead><tr><th>#</th><th>Problem</th><th>Level</th><th>Hint</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Print numbers 1 to 10</td><td><span class="tag tag-b" style="font-size:.62rem;padding:2px 7px">Easy</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Use: for i in range(1,11): print(i)')">Show Hint</button></td></tr>
+        <tr><td>2</td><td>Check even or odd</td><td><span class="tag tag-b" style="font-size:.62rem;padding:2px 7px">Easy</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Use: if n % 2 == 0: print(\"Even\") else: print(\"Odd\")')">Show Hint</button></td></tr>
+        <tr><td>3</td><td>Factorial of a number</td><td><span class="tag tag-b" style="font-size:.62rem;padding:2px 7px">Easy</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Use a loop: result = 1; for i in range(1, n+1): result *= i')">Show Hint</button></td></tr>
+        <tr><td>4</td><td>Reverse a string</td><td><span class="tag tag-i" style="font-size:.62rem;padding:2px 7px">Medium</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Python shortcut: text[::-1] reverses any string or list.')">Show Hint</button></td></tr>
+        <tr><td>5</td><td>Check if palindrome</td><td><span class="tag tag-i" style="font-size:.62rem;padding:2px 7px">Medium</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Check: text == text[::-1] — if True, it is a palindrome.')">Show Hint</button></td></tr>
+        <tr><td>6</td><td>Prime numbers up to N</td><td><span class="tag tag-i" style="font-size:.62rem;padding:2px 7px">Medium</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('For each n, check if any number from 2 to sqrt(n) divides it evenly.')">Show Hint</button></td></tr>
+        <tr><td>7</td><td>Fibonacci series</td><td><span class="tag tag-b" style="font-size:.62rem;padding:2px 7px">Easy</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Start: a,b = 0,1 — then loop: a,b = b, a+b — each iteration gives next number.')">Show Hint</button></td></tr>
+        <tr><td>8</td><td>Count vowels in string</td><td><span class="tag tag-b" style="font-size:.62rem;padding:2px 7px">Easy</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Loop through string, check if char in \"aeiouAEIOU\", increment counter.')">Show Hint</button></td></tr>
+        <tr><td>9</td><td>Find max in a list</td><td><span class="tag tag-b" style="font-size:.62rem;padding:2px 7px">Easy</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Use max(list) built-in OR loop and track largest seen so far.')">Show Hint</button></td></tr>
+        <tr><td>10</td><td>Binary search</td><td><span class="tag tag-i" style="font-size:.62rem;padding:2px 7px">Medium</span></td><td><button class="btn btn-ghost" style="padding:.22rem .6rem;font-size:.72rem" onclick="toast('Use left, right pointers. mid = (left+right)//2. Compare arr[mid] to target.')">Show Hint</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ───────── CAREER ───────── -->
+<section class="page" id="page-career">
+  <div class="sh"><h2>🚀 Career Guidance</h2></div>
+  <p style="color:var(--text2);margin-bottom:1.35rem;font-size:.875rem">Actionable steps from student to professional developer. Real advice for Indian students.</p>
+  <div class="g g2 mb">
+    <div class="card" style="cursor:default">
+      <div style="font-size:1.65rem;margin-bottom:.45rem">🌱</div><h3>How to Start Coding</h3>
+      <p style="color:var(--text2);font-size:.845rem;margin-bottom:.85rem">You don't need a degree or to be a genius. Start right now:</p>
+      <ul style="font-size:.82rem;color:var(--text2);line-height:1.85">
+        <li>✅ Pick ONE language first (Python or HTML+CSS)</li>
+        <li>✅ Code every day — even 30 minutes counts</li>
+        <li>✅ Build small projects — not just tutorials</li>
+        <li>✅ Join communities (Discord, r/learnprogramming)</li>
+        <li>✅ Google freely — every developer does</li>
+        <li>✅ Don't skip fundamentals — they matter long-term</li>
+        <li>✅ Use free platforms: CS Academy, freeCodeCamp, MDN</li>
+      </ul>
+    </div>
+    <div class="card" style="cursor:default">
+      <div style="font-size:1.65rem;margin-bottom:.45rem">👨‍💻</div><h3>Become a Developer (6–12 months)</h3>
+      <p style="color:var(--text2);font-size:.845rem;margin-bottom:.85rem">The proven path from beginner to employed:</p>
+      <ul style="font-size:.82rem;color:var(--text2);line-height:1.85">
+        <li>📚 <strong style="color:var(--text)">Month 1–2:</strong> Learn HTML, CSS, basic JavaScript</li>
+        <li>📚 <strong style="color:var(--text)">Month 3–4:</strong> Python or JS frameworks (React)</li>
+        <li>🔨 <strong style="color:var(--text)">Month 5–6:</strong> Build 3–5 portfolio projects</li>
+        <li>📁 <strong style="color:var(--text)">Month 6:</strong> GitHub profile + portfolio website</li>
+        <li>📝 <strong style="color:var(--text)">Month 7–8:</strong> Apply to internships (Internshala, LinkedIn)</li>
+        <li>🤝 <strong style="color:var(--text)">Ongoing:</strong> Hackathons, open source, networking</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sh"><h2>🗺️ Career Roadmaps</h2></div>
+  <div class="career-card">
+    <h3>🌐 Web Development Roadmap</h3><p>From zero to full-stack web developer. ~6–12 months consistent study.</p>
+    <div class="career-steps">
+      <div class="c-step"><div class="c-box start">HTML &amp; CSS</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">JavaScript</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">React.js</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Node.js</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Databases</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Git &amp; Deploy</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box end">Job! 🎉</div></div>
+    </div>
+  </div>
+  <div class="career-card">
+    <h3>🤖 AI &amp; Machine Learning Roadmap</h3><p>Become an AI/ML engineer. Strong Python + math required. ~12–18 months.</p>
+    <div class="career-steps">
+      <div class="c-step"><div class="c-box start">Python Basics</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Math &amp; Stats</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">NumPy/Pandas</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Scikit-learn</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Deep Learning</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box end">AI Job! 🤖</div></div>
+    </div>
+  </div>
+  <div class="career-card">
+    <h3>📊 Data Science Roadmap</h3><p>Analyze data, extract insights. Programming + statistics combo. ~8–12 months.</p>
+    <div class="career-steps">
+      <div class="c-step"><div class="c-box start">Python</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Statistics</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Pandas/NumPy</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">Data Viz</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box">SQL</div></div>
+      <div class="c-step"><span class="c-arr">→</span><div class="c-box end">Data Job! 📊</div></div>
+    </div>
+  </div>
+  <div class="ib tip">
+    <strong>💡 For Indian Students (Raipur / CG / India)</strong>
+    <p>Start with web development — highest demand, fastest path to job. Use Internshala, LinkedIn, Naukri for internships. Target Infosys, Wipro, TCS off-campus + startups. Build a strong GitHub + deploy projects. Practice LeetCode Easy problems after 3 months.</p>
+  </div>
+</section>
+
+<!-- ───────── ROADMAP ───────── -->
+<section class="page" id="page-roadmap">
+  <div class="sh"><h2>🗺️ Your Complete Learning Roadmap</h2></div>
+  <p style="color:var(--text2);margin-bottom:2rem;font-size:.875rem">Follow this step-by-step journey. Complete each stage before moving to the next for the best results.</p>
+  <div class="rm-wrap">
+    <div class="rm-track"></div>
+    <div id="rm-items"></div>
+  </div>
+</section>
+
+<!-- ───────── DASHBOARD ───────── -->
+<section class="page" id="page-dashboard">
+  <div class="sh"><h2>📊 My Learning Dashboard</h2></div>
+  <div class="dash-grid">
+    <div>
+      <div class="g g2" style="margin-bottom:.9rem">
+        <div class="card" style="cursor:default;text-align:center">
+          <div class="ring-wrap">
+            <svg width="110" height="110" viewBox="0 0 110 110">
+              <circle cx="55" cy="55" r="44" fill="none" stroke="var(--border2)" stroke-width="7"/>
+              <circle id="xp-ring" cx="55" cy="55" r="44" fill="none" stroke="var(--accent)" stroke-width="7"
+                stroke-dasharray="276.46" stroke-dashoffset="276.46"
+                stroke-linecap="round" style="transition:stroke-dashoffset 1s ease"/>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-xp" id="dash-xp">0</div>
+              <div class="ring-lbl">XP</div>
+            </div>
+          </div>
+          <div style="font-family:var(--font-d);font-size:.875rem;font-weight:700">Level 1 — Beginner</div>
+          <div style="font-size:.73rem;color:var(--text3);margin-top:.2rem">200 XP to Level 2</div>
+        </div>
+        <div>
+          <div class="streak-c">
+            <div style="font-size:.72rem;color:var(--amber);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">🔥 Streak</div>
+            <div class="streak-n">3</div>
+            <div style="font-size:.75rem;color:var(--text2)">days in a row</div>
+          </div>
+          <div class="card" style="cursor:default">
+            <div style="font-size:.72rem;color:var(--text3);margin-bottom:.45rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700">📈 Progress</div>
+            <div class="prog"><div class="prog-lbl"><span>Lessons Done</span><span id="prog-pct">0%</span></div><div class="prog-bar"><div class="prog-fill" id="prog-bar" style="width:0%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="cursor:default">
+        <h3 style="margin-bottom:.85rem;font-size:.9rem">📚 Lesson Progress</h3>
+        <div id="dash-lessons"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="cursor:default;margin-bottom:.9rem">
+        <h3 style="font-size:.875rem;margin-bottom:.85rem">🏆 Achievements</h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem">
+          <div id="ach-first" style="text-align:center;padding:.65rem;background:var(--bg2);border-radius:var(--radius-sm);opacity:.35">
+            <div style="font-size:1.35rem">🌱</div><div style="font-size:.66rem;color:var(--text3);margin-top:.2rem">First Lesson</div>
+          </div>
+          <div style="text-align:center;padding:.65rem;background:var(--bg2);border-radius:var(--radius-sm);opacity:.35"><div style="font-size:1.35rem">🔥</div><div style="font-size:.66rem;color:var(--text3);margin-top:.2rem">7-Day Streak</div></div>
+          <div style="text-align:center;padding:.65rem;background:var(--bg2);border-radius:var(--radius-sm);opacity:.35"><div style="font-size:1.35rem">🎯</div><div style="font-size:.66rem;color:var(--text3);margin-top:.2rem">Quiz Master</div></div>
+          <div id="ach-python" style="text-align:center;padding:.65rem;background:var(--bg2);border-radius:var(--radius-sm);opacity:.35"><div style="font-size:1.35rem">🐍</div><div style="font-size:.66rem;color:var(--text3);margin-top:.2rem">Python Pro</div></div>
+          <div id="ach-web" style="text-align:center;padding:.65rem;background:var(--bg2);border-radius:var(--radius-sm);opacity:.35"><div style="font-size:1.35rem">🌐</div><div style="font-size:.66rem;color:var(--text3);margin-top:.2rem">Web Builder</div></div>
+          <div id="ach-100" style="text-align:center;padding:.65rem;background:var(--bg2);border-radius:var(--radius-sm);opacity:.35"><div style="font-size:1.35rem">⭐</div><div style="font-size:.66rem;color:var(--text3);margin-top:.2rem">100 XP</div></div>
+        </div>
+      </div>
+      <div class="card" style="cursor:default">
+        <h3 style="font-size:.875rem;margin-bottom:.7rem">⚡ Quick Actions</h3>
+        <div style="display:flex;flex-direction:column;gap:.45rem">
+          <button class="btn btn-primary" style="justify-content:center" onclick="goLesson('intro-computer')">📖 Continue Learning</button>
+          <button class="btn btn-ghost" style="justify-content:center" onclick="goQuiz('general')">🎯 Take a Quiz</button>
+          <button class="btn btn-ghost" style="justify-content:center" onclick="go('roadmap')">🗺️ View Roadmap</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── LESSON (dynamic) ───────── -->
+<section class="page" id="page-lesson"></section>
+
+<!-- ───────── QUIZ (dynamic) ───────── -->
+<section class="page" id="page-quiz">
+  <div class="sh">
+    <div><h2>🎯 Knowledge Quiz</h2><p style="font-size:.8rem;color:var(--text2);margin-top:.2rem">Answer 5 questions to earn XP!</p></div>
+    <button class="btn btn-ghost" onclick="go('practice')">← Back</button>
+  </div>
+  <div id="quiz-box"></div>
+</section>
+
+<!-- ───────── SEARCH (dynamic) ───────── -->
+<section class="page" id="page-search"></section>
+
+</main>
+</div><!-- /layout -->
+
+<footer class="footer">
+  <div>⚡ <strong>CS Academy</strong> — Free Computer Science for Everyone</div>
+  <div style="display:flex;gap:.9rem;flex-wrap:wrap">
+    <span onclick="go('intro')" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">Intro</span>
+    <span onclick="go('languages')" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">Languages</span>
+    <span onclick="go('webdev')" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">Web Dev</span>
+    <span onclick="go('career')" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">Career</span>
+  </div>
+  <div>Built with ❤️ for students</div>
+</footer>
+
+<div class="toast" id="toast-el"></div>
+
+<!-- ═══════════ NOTES PANEL ═══════════ -->
+<div class="notes-panel" id="notesPanel">
+  <div class="np-head">
+    <h3 style="font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:.5rem"><i style="font-style:normal;font-size:1.2rem">📝</i> My Study Notes</h3>
+    <button class="btn-icon" onclick="toggleNotes()">✕</button>
+  </div>
+  <div class="np-body" id="notesList">
+    <div style="text-align:center;color:var(--text3);margin-top:2rem">Loading notes...</div>
+  </div>
+  <div class="np-foot">
+    <input type="text" id="noteTitle" class="note-input" placeholder="Note Title (e.g., Python Lists)">
+    <textarea id="noteContent" class="note-input" rows="3" placeholder="Write your note here..."></textarea>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveNote()">Save Note</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     COMPLETE JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+// ── State ──
+const S = {
+  theme: localStorage.getItem('csa-theme') || 'dark',
+  xp: +localStorage.getItem('csa-xp') || 0,
+  done: JSON.parse(localStorage.getItem('csa-done') || '[]'),
+  sidebarOpen: false,
+};
+
+// ── Theme ──
+function applyTheme(t) {
+  S.theme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('csa-theme', t);
+  document.getElementById('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+}
+function toggleTheme() { applyTheme(S.theme === 'dark' ? 'light' : 'dark'); }
+applyTheme(S.theme);
+
+// ── Navigation ──
+function go(pageId, extra = {}) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if (page) { page.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  const link = document.querySelector(`[data-p="${pageId}"]`);
+  if (link) link.classList.add('active');
+  if (pageId === 'roadmap') buildRoadmap();
+  if (pageId === 'dashboard') buildDash();
+  if (pageId === 'quiz') buildQuiz(extra.topic || 'general');
+  if (pageId === 'search') renderSearch(extra.q || '');
+  closeSidebar();
+}
+
+function goLesson(id) {
+  const lesson = LESSONS[id];
+  if (!lesson) { toast('Lesson coming soon! 🚀'); return; }
+  renderLesson(id);
+  go('lesson');
+}
+function goQuiz(topic) { go('quiz', { topic }); }
+
+// ── Sidebar ──
+function toggleSidebar() {
+  S.sidebarOpen = !S.sidebarOpen;
+  document.getElementById('sidebar').classList.toggle('open', S.sidebarOpen);
+}
+function closeSidebar() {
+  S.sidebarOpen = false;
+  document.getElementById('sidebar').classList.remove('open');
+}
+document.addEventListener('click', e => {
+  const sb = document.getElementById('sidebar');
+  const burger = document.getElementById('burger');
+  if (S.sidebarOpen && !sb.contains(e.target) && !burger.contains(e.target)) closeSidebar();
+});
+
+// ── Search ──
+const SEARCH_IDX = [
+  { t:'What is a Computer', pg:'lesson', id:'intro-computer', ico:'💻', tag:'beginner', mod:'Intro to CS' },
+  { t:'What is Programming', pg:'lesson', id:'intro-programming', ico:'⌨️', tag:'beginner', mod:'Intro to CS' },
+  { t:'Logic Building', pg:'lesson', id:'fund-logic', ico:'🧠', tag:'beginner', mod:'Fundamentals' },
+  { t:'Algorithms', pg:'lesson', id:'fund-algo', ico:'📐', tag:'beginner', mod:'Fundamentals' },
+  { t:'HTML Basics', pg:'lesson', id:'html', ico:'🌐', tag:'beginner', mod:'Languages' },
+  { t:'CSS Styling', pg:'lesson', id:'css', ico:'🎨', tag:'beginner', mod:'Languages' },
+  { t:'JavaScript', pg:'lesson', id:'javascript', ico:'⚡', tag:'intermediate', mod:'Languages' },
+  { t:'Python Programming', pg:'lesson', id:'python', ico:'🐍', tag:'beginner', mod:'Languages' },
+  { t:'C / C++', pg:'lesson', id:'cpp', ico:'⚙️', tag:'intermediate', mod:'Languages' },
+  { t:'Java', pg:'lesson', id:'java', ico:'☕', tag:'intermediate', mod:'Languages' },
+  { t:'Frontend Development', pg:'webdev', id:'', ico:'🖥️', tag:'intermediate', mod:'Web Dev' },
+  { t:'Backend Development', pg:'webdev', id:'', ico:'🔧', tag:'advanced', mod:'Web Dev' },
+  { t:'Databases & SQL', pg:'webdev', id:'', ico:'🗄️', tag:'intermediate', mod:'Web Dev' },
+  { t:'APIs & REST', pg:'webdev', id:'', ico:'🔌', tag:'advanced', mod:'Web Dev' },
+  { t:'General CS Quiz', pg:'quiz', id:'general', ico:'🎯', tag:'practice', mod:'Practice' },
+  { t:'HTML Quiz', pg:'quiz', id:'html', ico:'🌐', tag:'practice', mod:'Practice' },
+  { t:'Python Quiz', pg:'quiz', id:'python', ico:'🐍', tag:'practice', mod:'Practice' },
+  { t:'How to Start Coding', pg:'career', id:'', ico:'🌱', tag:'beginner', mod:'Career' },
+  { t:'Become a Developer', pg:'career', id:'', ico:'👨‍💻', tag:'all', mod:'Career' },
+  { t:'Web Dev Roadmap', pg:'career', id:'', ico:'🗺️', tag:'all', mod:'Career' },
+  { t:'AI & ML Roadmap', pg:'career', id:'', ico:'🤖', tag:'advanced', mod:'Career' },
+  { t:'Learning Roadmap', pg:'roadmap', id:'', ico:'🗺️', tag:'all', mod:'Navigation' },
+  { t:'My Progress Dashboard', pg:'dashboard', id:'', ico:'📊', tag:'all', mod:'Navigation' },
+];
+const TC = { beginner:'tag-b', intermediate:'tag-i', advanced:'tag-a', practice:'tag-p', all:'tag-all', web:'tag-w' };
+
+function doSearch(q) {
+  const val = q !== undefined ? q : (document.getElementById('searchInput')?.value || '');
+  go('search', { q: val });
+}
+function renderSearch(q) {
+  const page = document.getElementById('page-search');
+  const query = q.trim().toLowerCase();
+  const results = query === '' ? SEARCH_IDX :
+    SEARCH_IDX.filter(r => r.t.toLowerCase().includes(query) || r.mod.toLowerCase().includes(query) || r.tag.includes(query));
+  page.innerHTML = `
+    <div class="sh">
+      <h2>🔍 ${q ? `Results for "<span style="color:var(--accent)">${q}</span>"` : 'Browse All Topics'}</h2>
+      <span style="color:var(--text3);font-size:.8rem">${results.length} results</span>
+    </div>
+    <div class="sr-list">
+      ${results.length === 0 ? `<div style="padding:2rem;text-align:center;color:var(--text2)">No results found. Try different keywords.</div>` :
+        results.map(r => `
+          <div class="sr-item" onclick="${r.pg === 'lesson' && r.id ? `goLesson('${r.id}')` : r.pg === 'quiz' && r.id ? `goQuiz('${r.id}')` : `go('${r.pg}')`}">
+            <div class="sr-ico">${r.ico}</div>
+            <div class="sr-info"><h4>${r.t}</h4><p>${r.mod}</p></div>
+            <span class="tag ${TC[r.tag] || 'tag-all'}" style="margin:0;flex-shrink:0">${r.tag}</span>
+          </div>`).join('')}
+    </div>`;
+}
+document.getElementById('searchInput').addEventListener('keyup', e => { if (e.key === 'Enter') doSearch(); });
+
+// ══════════════════════════════════════
+//  LESSON CONTENT
+// ══════════════════════════════════════
+const LESSONS = {
+  'intro-computer': {
+    title:'💻 What is a Computer?', subtitle:'Understanding the machine that runs the world',
+    tag:'beginner', xp:50,
+    toc:['What is a Computer?','Types of Computers','How It Works','Key Components','Try It Yourself'],
+    html:`
+<h2>What is a Computer?</h2>
+<p>A computer is an electronic machine that can <strong>process, store, and retrieve data</strong>. It follows a set of instructions (called a <strong>program</strong>) to perform tasks automatically — millions of operations per second.</p>
+<p>Think of a computer like a very fast, very obedient helper: it does exactly what you tell it to do. YOU are the intelligent one who writes those instructions!</p>
+<div class="ib tip"><strong>💡 Key Idea</strong><p>A computer doesn't think on its own — it only follows instructions. This is why programming (writing those instructions) is such a powerful skill.</p></div>
+<h2>Types of Computers</h2>
+<ul>
+<li><strong>Desktop PC</strong> — Traditional computers at home or office with separate monitor and tower</li>
+<li><strong>Laptop</strong> — Portable, built-in screen and keyboard, runs on battery</li>
+<li><strong>Smartphone</strong> — A powerful pocket-sized computer (your phone has more power than a 1990s supercomputer!)</li>
+<li><strong>Tablet</strong> — Touch-based computers like iPad or Android tablets</li>
+<li><strong>Server</strong> — Powerful computers that run websites, apps, and cloud services 24/7</li>
+<li><strong>Supercomputer</strong> — Used for weather forecasting, scientific research, AI training</li>
+</ul>
+<h2>How It Works — The IPO Model</h2>
+<p>Every computer follows the <strong>Input → Process → Output</strong> cycle:</p>
+<ul>
+<li><strong>Input:</strong> You type on keyboard, click mouse, speak to microphone, scan a barcode</li>
+<li><strong>Process:</strong> The CPU (the "brain") processes and calculates</li>
+<li><strong>Output:</strong> Results appear on screen, speakers play sound, printer prints paper</li>
+<li><strong>Storage:</strong> Data is saved in RAM (temporary) or Hard Drive/SSD (permanent)</li>
+</ul>
+<div class="ib note"><strong>📌 Example</strong><p>You press a key on keyboard (Input) → CPU figures out which character to show (Process) → Character appears on screen (Output) → If you save the file, it goes to your hard drive (Storage)</p></div>
+<h2>Key Hardware Components</h2>
+<ul>
+<li><strong>CPU (Central Processing Unit)</strong> — The brain. Executes all program instructions. Speed measured in GHz (e.g., 3.2 GHz = 3.2 billion operations per second!)</li>
+<li><strong>RAM (Random Access Memory)</strong> — Temporary fast memory. Holds currently running programs. Lost when you turn off the computer. More RAM = can run more apps at once.</li>
+<li><strong>Storage (HDD/SSD)</strong> — Permanent memory. Files, photos, programs stay here even after shutdown. SSD is much faster than HDD.</li>
+<li><strong>GPU (Graphics Processing Unit)</strong> — Handles visuals, gaming, and AI computations</li>
+<li><strong>Motherboard</strong> — Main circuit board that connects all components together</li>
+</ul>
+<div class="ib warn"><strong>⚡ Try It Now!</strong><p>On Windows: Right-click "This PC" → Properties to see your CPU and RAM. On Mac: Apple menu → About This Mac. On phone: Settings → About Phone. Write down your specs — you've just learned to read computer hardware!</p></div>
+<h2>Hardware vs Software</h2>
+<p><strong>Hardware</strong> = physical parts you can touch: keyboard, screen, CPU chip, RAM stick.</p>
+<p><strong>Software</strong> = programs and instructions: Windows, Android, Chrome browser, games, apps.</p>
+<p>Hardware without software is like a human body without a brain — it can't do anything. Software without hardware has nothing to run on. They need each other!</p>`
+  },
+
+  'intro-programming': {
+    title:'⌨️ What is Programming?', subtitle:'Learning to give instructions to computers',
+    tag:'beginner', xp:50,
+    toc:['What is Programming?','Why Learn to Code?','How Programs Run','Your First Program','Next Steps'],
+    html:`
+<h2>What is Programming?</h2>
+<p>Programming is the act of <strong>writing step-by-step instructions for a computer to follow</strong>. These instructions are written in a special language called a <strong>programming language</strong> — something both humans can read and computers can understand.</p>
+<p>Real-life analogy: Imagine teaching someone who has never cooked how to make chai (tea). You'd give exact steps: "Fill kettle with 2 cups water. Heat on high. When boiling, add 1 tea bag. Wait 3 minutes. Add 2 spoons sugar. Stir and pour." That's programming — but for computers!</p>
+<div class="ib tip"><strong>💡 Simple Definition</strong><p>Programming = Writing clear, step-by-step instructions for a computer to solve a problem or complete a task automatically.</p></div>
+<h2>Why Learn to Code?</h2>
+<ul>
+<li>🌐 <strong>Build products</strong> — websites, apps, games used by millions of people</li>
+<li>💰 <strong>High salaries</strong> — Average software developer earns ₹5–25 LPA in India, $100k+ abroad</li>
+<li>🤖 <strong>Build AI</strong> — ChatGPT, image recognition, recommendation systems are all code</li>
+<li>🚀 <strong>Start a startup</strong> — WhatsApp (2 developers), Instagram (13 employees) — started with code</li>
+<li>🧠 <strong>Think better</strong> — Programming trains logical, structured problem-solving that helps in every career</li>
+<li>🌍 <strong>Work from anywhere</strong> — Remote work is standard in tech; you can work for a US company from Raipur</li>
+</ul>
+<h2>How Do Programs Run?</h2>
+<ul>
+<li><strong>Step 1:</strong> You write code in a text editor (like VS Code) in a human-readable language</li>
+<li><strong>Step 2:</strong> A <em>compiler</em> or <em>interpreter</em> translates it into machine language (binary: 0s and 1s)</li>
+<li><strong>Step 3:</strong> The CPU reads and executes the machine code</li>
+<li><strong>Step 4:</strong> You see the result on screen (or it does something in the background)</li>
+</ul>
+<div class="ib note"><strong>📌 Compiled vs Interpreted</strong><p>C/C++/Java are <em>compiled</em> — translated entirely before running. Python/JavaScript are <em>interpreted</em> — translated line-by-line as they run. Both approaches work great; interpreted languages are usually easier to start with.</p></div>
+<h2>Your First Program</h2>
+<p>The global tradition: every programmer's first program is "Hello, World!" — making the computer display that text. Let's do it in 3 languages:</p>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm"># My first Python program!</span>
+<span class="fn">print</span>(<span class="str">"Hello, World!"</span>)
+<span class="fn">print</span>(<span class="str">"I am learning programming!"</span>)
+<span class="fn">print</span>(<span class="str">"This is amazing! 🎉"</span>)</pre></div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">JavaScript</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">// My first JavaScript program</span>
+<span class="fn">console</span>.log(<span class="str">"Hello, World!"</span>);
+<span class="fn">console</span>.log(<span class="str">"JavaScript runs in your browser!"</span>);</pre></div>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+    <span class="kw">&lt;h1&gt;</span>Hello, World!<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;p&gt;</span>My first webpage! 🌐<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></pre></div>
+<div class="ib warn"><strong>⚡ Try It Right Now!</strong><p>For Python: go to <strong>python.org/shell</strong> online. For JavaScript: press F12 in Chrome/Edge, click Console tab, and type the code. For HTML: save as a .html file and open in browser. Seeing YOUR code run for the first time is a special moment!</p></div>
+<h2>Next Steps</h2>
+<p>You've taken the first step! Here's what to learn next:</p>
+<ul>
+<li>➡️ Complete Module 2: Programming Fundamentals (logic, algorithms)</li>
+<li>➡️ Start the HTML course to build your first real webpage</li>
+<li>➡️ Start the Python course for general-purpose programming</li>
+<li>➡️ Check the Learning Roadmap for your personalized path</li>
+</ul>`
+  },
+
+  'fund-logic': {
+    title:'🧠 Logic Building', subtitle:'Train your brain to think like a programmer',
+    tag:'beginner', xp:70,
+    toc:['What is Logic?','Boolean Values','AND OR NOT','Comparisons','Decision Making','Practice'],
+    html:`
+<h2>What is Logic in Programming?</h2>
+<p>Logic in programming means <strong>making decisions based on conditions</strong>. Every program makes decisions: "If the user is logged in, show the dashboard. Otherwise, show the login page." That's logic!</p>
+<div class="ib tip"><strong>💡 Logic = Decisions</strong><p>Without logic, programs could only do fixed things. Logic allows programs to react differently based on different situations — making them intelligent and useful.</p></div>
+<h2>Boolean Values</h2>
+<p>The foundation of logic is <strong>Boolean values</strong> — things that are either <code>True</code> or <code>False</code>. Named after mathematician George Boole.</p>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm"># Boolean examples</span>
+is_logged_in = <span class="kw">True</span>
+has_premium = <span class="kw">False</span>
+is_adult = <span class="num">18</span> >= <span class="num">18</span>   <span class="cm"># True</span>
+is_raining = <span class="num">5</span> > <span class="num">10</span>    <span class="cm"># False</span>
+
+<span class="fn">print</span>(is_adult)    <span class="cm"># True</span>
+<span class="fn">print</span>(is_raining)  <span class="cm"># False</span>
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="kw">True</span>))  <span class="cm"># &lt;class 'bool'&gt;</span></pre></div>
+<h2>AND, OR, NOT Operators</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm"># AND — both must be True</span>
+has_id = <span class="kw">True</span>
+has_ticket = <span class="kw">True</span>
+can_enter = has_id <span class="kw">and</span> has_ticket  <span class="cm"># True</span>
+
+<span class="cm"># OR — at least one must be True</span>
+has_cash = <span class="kw">False</span>
+has_card = <span class="kw">True</span>
+can_pay = has_cash <span class="kw">or</span> has_card  <span class="cm"># True</span>
+
+<span class="cm"># NOT — flips True/False</span>
+is_busy = <span class="kw">False</span>
+is_available = <span class="kw">not</span> is_busy  <span class="cm"># True</span>
+
+<span class="fn">print</span>(can_enter)    <span class="cm"># True</span>
+<span class="fn">print</span>(can_pay)      <span class="cm"># True</span>
+<span class="fn">print</span>(is_available) <span class="cm"># True</span></pre></div>
+<h2>Comparison Operators</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre>age = <span class="num">20</span>
+<span class="fn">print</span>(age == <span class="num">20</span>)  <span class="cm"># True  (equal to)</span>
+<span class="fn">print</span>(age != <span class="num">18</span>)  <span class="cm"># True  (not equal)</span>
+<span class="fn">print</span>(age > <span class="num">18</span>)   <span class="cm"># True  (greater than)</span>
+<span class="fn">print</span>(age < <span class="num">18</span>)   <span class="cm"># False (less than)</span>
+<span class="fn">print</span>(age >= <span class="num">20</span>)  <span class="cm"># True  (greater or equal)</span>
+<span class="fn">print</span>(age <= <span class="num">20</span>)  <span class="cm"># True  (less or equal)</span></pre></div>
+<h2>Decision Making — if/elif/else</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre>marks = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Enter your marks: "</span>))
+
+<span class="kw">if</span> marks >= <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"🌟 Grade A+ — Excellent!"</span>)
+<span class="kw">elif</span> marks >= <span class="num">75</span>:
+    <span class="fn">print</span>(<span class="str">"👍 Grade A — Very Good!"</span>)
+<span class="kw">elif</span> marks >= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"😊 Grade B — Good!"</span>)
+<span class="kw">elif</span> marks >= <span class="num">40</span>:
+    <span class="fn">print</span>(<span class="str">"📚 Grade C — Keep studying!"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"❌ Grade F — Work harder!"</span>)</pre></div>
+<div class="ib warn"><strong>⚡ Challenge</strong><p>Write a program that asks if it's raining (True/False) and if you have an umbrella (True/False). Print "You will get wet!", "You're safe!", or "Stay home!" based on the combination.</p></div>`
+  },
+
+  'fund-algo': {
+    title:'📐 Algorithms', subtitle:'Step-by-step problem solving strategies',
+    tag:'beginner', xp:80,
+    toc:['What is an Algorithm?','Properties','Bubble Sort','Binary Search','Big O Notation','Practice'],
+    html:`
+<h2>What is an Algorithm?</h2>
+<p>An algorithm is a <strong>finite set of clear, unambiguous instructions</strong> to solve a problem or accomplish a task. Every program you'll ever write is built on algorithms.</p>
+<p>Real-life algorithms: A recipe for biryani is an algorithm for cooking. Turn-by-turn GPS directions are an algorithm for navigation. ATM PIN verification is an algorithm for security.</p>
+<div class="ib tip"><strong>💡 Golden Rule</strong><p>Before writing any code, think about the algorithm first. A good algorithm = clean, fast, correct code. Jumping straight to code without planning = messy, slow, buggy code.</p></div>
+<h2>Properties of a Good Algorithm</h2>
+<ul>
+<li><strong>Input:</strong> Takes 0 or more inputs (can work without any input too)</li>
+<li><strong>Output:</strong> Produces at least 1 output (a result)</li>
+<li><strong>Definiteness:</strong> Every step is clear and unambiguous — no confusion about what to do</li>
+<li><strong>Finiteness:</strong> Must end after a finite number of steps — it can't run forever</li>
+<li><strong>Effectiveness:</strong> Every step is feasible — no "magic" steps that are impossible to do</li>
+</ul>
+<h2>Bubble Sort</h2>
+<p>Compares adjacent elements and swaps them if out of order. Like bubbles rising to the surface.</p>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">def</span> <span class="fn">bubble_sort</span>(arr):
+    n = <span class="fn">len</span>(arr)
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n):
+        <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, n - i - <span class="num">1</span>):
+            <span class="kw">if</span> arr[j] > arr[j + <span class="num">1</span>]:
+                <span class="cm"># Swap the elements</span>
+                arr[j], arr[j + <span class="num">1</span>] = arr[j + <span class="num">1</span>], arr[j]
+    <span class="kw">return</span> arr
+
+numbers = [<span class="num">64</span>, <span class="num">34</span>, <span class="num">25</span>, <span class="num">12</span>, <span class="num">22</span>, <span class="num">11</span>, <span class="num">90</span>]
+<span class="fn">print</span>(<span class="fn">bubble_sort</span>(numbers))
+<span class="cm"># Output: [11, 12, 22, 25, 34, 64, 90]</span></pre></div>
+<h2>Binary Search</h2>
+<p>Find an element in a <em>sorted</em> list by repeatedly halving the search space. Far faster than checking every element!</p>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">def</span> <span class="fn">binary_search</span>(arr, target):
+    left, right = <span class="num">0</span>, <span class="fn">len</span>(arr) - <span class="num">1</span>
+    
+    <span class="kw">while</span> left <= right:
+        mid = (left + right) // <span class="num">2</span>  <span class="cm"># Middle index</span>
+        
+        <span class="kw">if</span> arr[mid] == target:
+            <span class="kw">return</span> mid         <span class="cm"># Found! Return index</span>
+        <span class="kw">elif</span> arr[mid] < target:
+            left = mid + <span class="num">1</span>    <span class="cm"># Target is in RIGHT half</span>
+        <span class="kw">else</span>:
+            right = mid - <span class="num">1</span>   <span class="cm"># Target is in LEFT half</span>
+    
+    <span class="kw">return</span> -<span class="num">1</span>  <span class="cm"># Not found</span>
+
+arr = [<span class="num">1</span>, <span class="num">3</span>, <span class="num">5</span>, <span class="num">7</span>, <span class="num">9</span>, <span class="num">11</span>, <span class="num">13</span>, <span class="num">15</span>, <span class="num">17</span>]
+<span class="fn">print</span>(<span class="fn">binary_search</span>(arr, <span class="num">7</span>))   <span class="cm"># Output: 3</span>
+<span class="fn">print</span>(<span class="fn">binary_search</span>(arr, <span class="num">99</span>))  <span class="cm"># Output: -1</span></pre></div>
+<h2>Big O Notation — Measuring Efficiency</h2>
+<p>Big O describes how an algorithm's speed scales as the input grows:</p>
+<ul>
+<li><strong>O(1) — Constant</strong> — Same speed regardless of size. Array index access.</li>
+<li><strong>O(log n) — Logarithmic</strong> — Binary Search. 1 million items? Only 20 checks!</li>
+<li><strong>O(n) — Linear</strong> — Check each item once. Simple loop through array.</li>
+<li><strong>O(n²) — Quadratic</strong> — Bubble Sort, nested loops. Gets slow fast.</li>
+<li><strong>O(2ⁿ) — Exponential</strong> — Avoid! Brute force solutions.</li>
+</ul>
+<div class="ib note"><strong>📌 Real Impact</strong><p>Searching 1 million items: Linear Search checks up to 1,000,000 items. Binary Search checks at most 20 items. Big O tells you which algorithm will work at scale!</p></div>
+<div class="ib warn"><strong>⚡ Challenge</strong><p>Write a "Linear Search" function that finds a target in an unsorted array by checking every element. Then compare it to Binary Search — how many steps does each take for a list of 1000 items?</p></div>`
+  },
+
+  'html': {
+    title:'🌐 HTML — Building Blocks of the Web', subtitle:'From zero to your first real webpage',
+    tag:'beginner', xp:100,
+    toc:['What is HTML?','Basic Structure','Tags & Elements','Headings & Paragraphs','Links & Images','Lists & Tables','Forms','Your First Page'],
+    html:`
+<h2>What is HTML?</h2>
+<p>HTML stands for <strong>HyperText Markup Language</strong>. It's the skeleton/structure of EVERY webpage on the internet. When you visit any website, your browser is reading HTML to know what to show.</p>
+<p>HTML is NOT a programming language — it's a <strong>markup language</strong>. It doesn't do logic or calculations; it just structures content.</p>
+<div class="ib tip"><strong>💡 Website = HTML + CSS + JS</strong><p>HTML = the structure (walls, floors). CSS = the decoration (paint, furniture). JavaScript = the electricity (lights, moving doors). You can't have a website without HTML.</p></div>
+<h2>Basic Page Structure</h2>
+<p>Every HTML file follows this exact structure:</p>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> <span class="fn">lang</span>=<span class="str">"en"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="fn">charset</span>=<span class="str">"UTF-8"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="fn">name</span>=<span class="str">"viewport"</span> <span class="fn">content</span>=<span class="str">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;title&gt;</span>My First Webpage<span class="kw">&lt;/title&gt;</span>
+  <span class="kw">&lt;/head&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+    <span class="kw">&lt;h1&gt;</span>Hello, World!<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;p&gt;</span>Welcome to my first webpage!<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></pre></div>
+<h2>Essential Tags</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">&lt;!-- Headings (h1 = biggest, h6 = smallest) --&gt;</span>
+<span class="kw">&lt;h1&gt;</span>Main Page Title<span class="kw">&lt;/h1&gt;</span>
+<span class="kw">&lt;h2&gt;</span>Section Title<span class="kw">&lt;/h2&gt;</span>
+<span class="kw">&lt;h3&gt;</span>Sub-section<span class="kw">&lt;/h3&gt;</span>
+
+<span class="cm">&lt;!-- Paragraph with formatting --&gt;</span>
+<span class="kw">&lt;p&gt;</span>This is a <span class="kw">&lt;strong&gt;</span>bold word<span class="kw">&lt;/strong&gt;</span> and this is <span class="kw">&lt;em&gt;</span>italic<span class="kw">&lt;/em&gt;</span>.<span class="kw">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- Line break --&gt;</span>
+<span class="kw">&lt;p&gt;</span>Line 1<span class="kw">&lt;br&gt;</span>Line 2 (on new line)<span class="kw">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- Divider line --&gt;</span>
+<span class="kw">&lt;hr&gt;</span></pre></div>
+<h2>Links &amp; Images</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">&lt;!-- Link to another website --&gt;</span>
+<span class="kw">&lt;a</span> <span class="fn">href</span>=<span class="str">"https://google.com"</span><span class="kw">&gt;</span>Visit Google<span class="kw">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Link to another page in your site --&gt;</span>
+<span class="kw">&lt;a</span> <span class="fn">href</span>=<span class="str">"about.html"</span><span class="kw">&gt;</span>About Me<span class="kw">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Open in new browser tab --&gt;</span>
+<span class="kw">&lt;a</span> <span class="fn">href</span>=<span class="str">"https://github.com"</span> <span class="fn">target</span>=<span class="str">"_blank"</span><span class="kw">&gt;</span>GitHub<span class="kw">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- Image --&gt;</span>
+<span class="kw">&lt;img</span> <span class="fn">src</span>=<span class="str">"photo.jpg"</span> <span class="fn">alt</span>=<span class="str">"Description of image"</span> <span class="fn">width</span>=<span class="str">"300"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- Image from internet --&gt;</span>
+<span class="kw">&lt;img</span> <span class="fn">src</span>=<span class="str">"https://picsum.photos/400/200"</span> <span class="fn">alt</span>=<span class="str">"Random photo"</span><span class="kw">&gt;</span></pre></div>
+<h2>Lists</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">&lt;!-- Unordered (bullet) list --&gt;</span>
+<span class="kw">&lt;ul&gt;</span>
+  <span class="kw">&lt;li&gt;</span>HTML — structure<span class="kw">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span>CSS — styling<span class="kw">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span>JavaScript — interactivity<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ul&gt;</span>
+
+<span class="cm">&lt;!-- Ordered (numbered) list --&gt;</span>
+<span class="kw">&lt;ol&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Learn HTML<span class="kw">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Learn CSS<span class="kw">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Build a project! 🚀<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ol&gt;</span></pre></div>
+<h2>Forms — Collecting User Input</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">&lt;form&gt;</span>
+  <span class="kw">&lt;label&gt;</span>Your Name:<span class="kw">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="fn">type</span>=<span class="str">"text"</span> <span class="fn">placeholder</span>=<span class="str">"Enter your name"</span><span class="kw">&gt;</span>
+  
+  <span class="kw">&lt;label&gt;</span>Email:<span class="kw">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="fn">type</span>=<span class="str">"email"</span> <span class="fn">placeholder</span>=<span class="str">"you@example.com"</span><span class="kw">&gt;</span>
+  
+  <span class="kw">&lt;label&gt;</span>Password:<span class="kw">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="fn">type</span>=<span class="str">"password"</span><span class="kw">&gt;</span>
+  
+  <span class="kw">&lt;button</span> <span class="fn">type</span>=<span class="str">"submit"</span><span class="kw">&gt;</span>Sign Up!<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;/form&gt;</span></pre></div>
+<div class="ib warn"><strong>⚡ Project: Build Your About Me Page</strong><p>Create <code>index.html</code> with: your name in H1, a paragraph about yourself, an unordered list of your hobbies, a link to your favorite website, and an image. Open in browser — you have a real webpage!</p></div>`
+  },
+
+  'css': {
+    title:'🎨 CSS — Styling the Web', subtitle:'Make your webpages beautiful and responsive',
+    tag:'beginner', xp:100,
+    toc:['What is CSS?','Selectors','Colors & Fonts','Box Model','Flexbox','Responsive Design'],
+    html:`
+<h2>What is CSS?</h2>
+<p>CSS stands for <strong>Cascading Style Sheets</strong>. It controls how HTML elements look — colors, fonts, layouts, animations, and responsiveness.</p>
+<div class="ib tip"><strong>💡 Without CSS</strong><p>Without CSS, every website would look like a plain text document from the 1990s. CSS is what makes the modern, beautiful web possible.</p></div>
+<h2>How to Add CSS</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">HTML + CSS</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">&lt;!-- Method 1: External file (BEST) --&gt;</span>
+<span class="kw">&lt;link</span> <span class="fn">rel</span>=<span class="str">"stylesheet"</span> <span class="fn">href</span>=<span class="str">"style.css"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- Method 2: Inside &lt;style&gt; tag --&gt;</span>
+<span class="kw">&lt;style&gt;</span>
+  body { background-color: #f0f0f0; }
+<span class="kw">&lt;/style&gt;</span>
+
+<span class="cm">&lt;!-- Method 3: Inline (avoid for large projects) --&gt;</span>
+<span class="kw">&lt;p</span> <span class="fn">style</span>=<span class="str">"color: red; font-size: 20px;"</span><span class="kw">&gt;</span>Red text<span class="kw">&lt;/p&gt;</span></pre></div>
+<h2>Selectors, Properties & Values</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">CSS</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">/* Tag selector — targets all &lt;h1&gt; elements */</span>
+h1 {
+  color: #00d4b4;           <span class="cm">/* Text color */</span>
+  font-size: 2rem;          <span class="cm">/* Font size */</span>
+  font-family: Arial;       <span class="cm">/* Font */</span>
+  text-align: center;       <span class="cm">/* Alignment */</span>
+}
+
+<span class="cm">/* Class selector — targets elements with class="card" */</span>
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+<span class="cm">/* ID selector — targets element with id="header" */</span>
+#header {
+  background: #111;
+  color: white;
+  height: 60px;
+}</pre></div>
+<h2>Flexbox — Modern Layout</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">CSS</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">/* Parent container */</span>
+.container {
+  display: flex;           <span class="cm">/* Enable flexbox */</span>
+  justify-content: center; <span class="cm">/* Center horizontally */</span>
+  align-items: center;     <span class="cm">/* Center vertically */</span>
+  gap: 20px;               <span class="cm">/* Space between items */</span>
+  flex-wrap: wrap;         <span class="cm">/* Wrap to next line if needed */</span>
+}
+
+<span class="cm">/* Child items */</span>
+.card {
+  flex: 1;                 <span class="cm">/* Each card gets equal space */</span>
+  min-width: 200px;        <span class="cm">/* Don't shrink below 200px */</span>
+}</pre></div>
+<div class="ib warn"><strong>⚡ Challenge</strong><p>Take your "About Me" HTML page and create a style.css file. Change: background color, heading color, add a nice font from Google Fonts, add padding and border-radius to sections. Make it look professional!</p></div>`
+  },
+
+  'javascript': {
+    title:'⚡ JavaScript — Make Pages Interactive', subtitle:'The programming language of the web',
+    tag:'intermediate', xp:150,
+    toc:['What is JS?','Variables & Types','Functions','DOM Manipulation','Events','Fetch API'],
+    html:`
+<h2>What is JavaScript?</h2>
+<p>JavaScript (JS) is the programming language of the web. While HTML structures content and CSS styles it, JavaScript makes pages <strong>interactive and dynamic</strong>. Every button click, form validation, animation, and live update on a website is JavaScript.</p>
+<div class="ib tip"><strong>💡 JS Everywhere</strong><p>JavaScript runs in browsers (frontend) AND on servers via Node.js (backend). Learning JS means you can build both sides of a web application — making it the most versatile language for web developers.</p></div>
+<h2>Variables and Data Types</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">JavaScript</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">// Modern JS — use let and const</span>
+<span class="kw">const</span> name = <span class="str">"Rahul"</span>;      <span class="cm">// String — won't change</span>
+<span class="kw">let</span> age = <span class="num">20</span>;              <span class="cm">// Number — can change</span>
+<span class="kw">let</span> isStudent = <span class="kw">true</span>;     <span class="cm">// Boolean</span>
+<span class="kw">const</span> skills = [<span class="str">"HTML"</span>, <span class="str">"CSS"</span>, <span class="str">"JS"</span>];  <span class="cm">// Array</span>
+
+<span class="cm">// Template literals (modern string formatting)</span>
+<span class="fn">console</span>.log(<span class="str">Hello, \${name} ! You are \${age} years old.</span>);</pre></div>
+<h2>DOM Manipulation — Change the Page!</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">JavaScript</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">// Get an element and change it</span>
+<span class="kw">const</span> heading = document.<span class="fn">getElementById</span>(<span class="str">"title"</span>);
+heading.textContent = <span class="str">"Changed by JavaScript!"</span>;
+heading.style.color = <span class="str">"#00d4b4"</span>;
+
+<span class="cm">// Create a new element and add it to the page</span>
+<span class="kw">const</span> newPara = document.<span class="fn">createElement</span>(<span class="str">"p"</span>);
+newPara.textContent = <span class="str">"This paragraph was added by JS!"</span>;
+document.body.<span class="fn">appendChild</span>(newPara);</pre></div>
+<h2>Event Handling — React to User Actions</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">JavaScript</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">// Listen for a button click</span>
+<span class="kw">const</span> btn = document.<span class="fn">getElementById</span>(<span class="str">"myBtn"</span>);
+
+btn.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span>() {
+  <span class="fn">alert</span>(<span class="str">"Button was clicked! 🎉"</span>);
+});
+
+<span class="cm">// Modern arrow function syntax</span>
+btn.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, () => {
+  document.<span class="fn">getElementById</span>(<span class="str">"result"</span>).textContent = <span class="str">"Clicked!"</span>;
+});</pre></div>
+<h2>Fetch API — Get Data from Internet</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">JavaScript</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">// Fetch weather data from an API</span>
+<span class="kw">async function</span> <span class="fn">getWeather</span>(city) {
+  <span class="kw">const</span> url = <span class="str">https://api.openweathermap.org/data/2.5/weather?q=\${city}</span>;
+  
+  <span class="kw">const</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(url);
+  <span class="kw">const</span> data = <span class="kw">await</span> response.<span class="fn">json</span>();
+  
+  <span class="fn">console</span>.log(<span class="str">City: \${data.name}</span>);
+  <span class="fn">console</span>.log(<span class="str">Temp: \${data.main.temp}°C</span>);
+}
+
+<span class="fn">getWeather</span>(<span class="str">"Mumbai"</span>);</pre></div>
+<div class="ib warn"><strong>⚡ Challenge</strong><p>Create an HTML file with an input box, a button, and a div. When the button is clicked, read the text from the input box and display it in the div. This is the foundation of every interactive web app!</p></div>`
+  },
+
+  'python': {
+    title:'🐍 Python Programming', subtitle:'The most beginner-friendly language — used in AI, web, and automation',
+    tag:'beginner', xp:120,
+    toc:['Why Python?','Variables & Types','Input & Output','Conditions','Loops','Functions','Lists & Dicts','Practice'],
+    html:`
+<h2>Why Python?</h2>
+<p>Python is the #1 recommended first programming language. It reads almost like plain English, has incredibly clean syntax, and is used in web development, AI/ML, data science, automation, scripting, and more.</p>
+<div class="ib tip"><strong>💡 Python Powers</strong><p>Instagram, YouTube, Netflix, Google, NASA, Spotify — all use Python. It's the top language for AI/ML. Learning Python opens more career doors than almost any other language.</p></div>
+<h2>Variables &amp; Data Types</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm"># No need to declare type — Python figures it out</span>
+name = <span class="str">"Priya"</span>           <span class="cm"># str (text)</span>
+age = <span class="num">20</span>                 <span class="cm"># int (whole number)</span>
+cgpa = <span class="num">8.5</span>              <span class="cm"># float (decimal)</span>
+is_studying = <span class="kw">True</span>      <span class="cm"># bool (True/False)</span>
+hobbies = [<span class="str">"coding"</span>, <span class="str">"music"</span>, <span class="str">"reading"</span>]  <span class="cm"># list</span>
+
+<span class="fn">print</span>(name, age, cgpa)
+<span class="fn">print</span>(<span class="fn">type</span>(name))  <span class="cm"># &lt;class 'str'&gt;</span>
+<span class="fn">print</span>(<span class="str">f"{name} is {age} years old with {cgpa} CGPA"</span>)</pre></div>
+<h2>Input &amp; Output</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre>name = <span class="fn">input</span>(<span class="str">"Enter your name: "</span>)
+age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Enter your age: "</span>))
+marks = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"Enter your marks: "</span>))
+
+<span class="fn">print</span>(<span class="str">f"Hello {name}!"</span>)
+<span class="fn">print</span>(<span class="str">f"Next year you'll be {age + 1}"</span>)
+<span class="fn">print</span>(<span class="str">f"Your percentage: {marks}%"</span>)</pre></div>
+<h2>Conditions</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre>marks = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Enter marks (0-100): "</span>))
+
+<span class="kw">if</span> marks >= <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"🌟 Grade A+ — Excellent!"</span>)
+<span class="kw">elif</span> marks >= <span class="num">75</span>:
+    <span class="fn">print</span>(<span class="str">"👍 Grade A — Very Good!"</span>)
+<span class="kw">elif</span> marks >= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"😊 Grade B — Good!"</span>)
+<span class="kw">elif</span> marks >= <span class="num">40</span>:
+    <span class="fn">print</span>(<span class="str">"📚 Grade C — Keep studying!"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"❌ Grade F — Work harder!"</span>)</pre></div>
+<h2>Loops</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm"># For loop</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">6</span>):
+    <span class="fn">print</span>(<span class="str">f"Count: {i}"</span>)
+
+<span class="cm"># While loop</span>
+count = <span class="num">1</span>
+<span class="kw">while</span> count <= <span class="num">5</span>:
+    <span class="fn">print</span>(<span class="str">f"While: {count}"</span>)
+    count += <span class="num">1</span>
+
+<span class="cm"># Loop through a list</span>
+fruits = [<span class="str">"apple"</span>, <span class="str">"mango"</span>, <span class="str">"banana"</span>]
+<span class="kw">for</span> fruit <span class="kw">in</span> fruits:
+    <span class="fn">print</span>(<span class="str">f"I love {fruit}! 🍎"</span>)</pre></div>
+<h2>Functions</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Python</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">def</span> <span class="fn">greet</span>(name, city=<span class="str">"India"</span>):
+    <span class="fn">print</span>(<span class="str">f"Hello {name} from {city}! 🎉"</span>)
+
+<span class="kw">def</span> <span class="fn">calculate_bmi</span>(weight, height):
+    bmi = weight / (height ** <span class="num">2</span>)
+    <span class="kw">return</span> <span class="fn">round</span>(bmi, <span class="num">2</span>)
+
+<span class="fn">greet</span>(<span class="str">"Rahul"</span>)
+<span class="fn">greet</span>(<span class="str">"Priya"</span>, <span class="str">"Raipur"</span>)
+bmi = <span class="fn">calculate_bmi</span>(<span class="num">70</span>, <span class="num">1.75</span>)
+<span class="fn">print</span>(<span class="str">f"BMI: {bmi}"</span>)</pre></div>
+<div class="ib warn"><strong>⚡ Practice Challenges</strong><p>1. Print multiplication table of any number. 2. Find sum of digits of a number. 3. Write a function to check if a year is a leap year. 4. Create a simple number guessing game using while loop and random.randint()!</p></div>`
+  },
+
+  'cpp': {
+    title:'⚙️ C / C++ Programming', subtitle:'Systems programming, speed, and competitive coding',
+    tag:'intermediate', xp:150,
+    toc:['Why C/C++?','Hello World','Variables & Types','Input/Output','Control Flow','Functions','Pointers Intro'],
+    html:`
+<h2>Why Learn C / C++?</h2>
+<ul>
+<li><strong>Foundation language</strong> — Most programming concepts originated in C</li>
+<li><strong>Speed</strong> — Faster than Python/JS; used for operating systems, games, embedded systems</li>
+<li><strong>Competitive programming</strong> — Most competitive programmers use C++ for its speed and STL</li>
+<li><strong>Jobs</strong> — Required at many companies including gaming, embedded, systems, finance</li>
+<li><strong>Deeper understanding</strong> — Memory management teaches you how computers really work</li>
+</ul>
+<div class="ib note"><strong>📌 C vs C++</strong><p>C (1972) is the older language — purely procedural, used for OS kernels, embedded systems. C++ (1983) extends C with OOP (classes, objects) — used for games, system software, competitive programming. Learn C first, then C++.</p></div>
+<h2>Your First C Program</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">C</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="cm">// First C program</span>
+<span class="kw">#include</span> <span class="str">&lt;stdio.h&gt;</span>    <span class="cm">// Include standard I/O library</span>
+
+<span class="fn">int</span> <span class="fn">main</span>() {         <span class="cm">// main() is where every C program starts</span>
+    <span class="fn">printf</span>(<span class="str">"Hello, World!\n"</span>);  <span class="cm">// \n is newline</span>
+    <span class="fn">printf</span>(<span class="str">"I am learning C programming!\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;          <span class="cm">// 0 means program ran successfully</span>
+}</pre></div>
+<h2>Variables and Data Types</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">C</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+
+<span class="fn">int</span> <span class="fn">main</span>() {
+    <span class="fn">int</span> age = <span class="num">20</span>;          <span class="cm">// Integer (-32768 to 32767)</span>
+    <span class="fn">float</span> cgpa = <span class="num">8.5</span>;     <span class="cm">// Decimal (less precise)</span>
+    <span class="fn">double</span> pi = <span class="num">3.14159265</span>;<span class="cm">// Decimal (more precise)</span>
+    <span class="fn">char</span> grade = <span class="str">'A'</span>;     <span class="cm">// Single character</span>
+    
+    <span class="fn">printf</span>(<span class="str">"Age: %d\n"</span>, age);
+    <span class="fn">printf</span>(<span class="str">"CGPA: %.2f\n"</span>, cgpa);
+    <span class="fn">printf</span>(<span class="str">"Grade: %c\n"</span>, grade);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre></div>
+<h2>C++ with Classes</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">C++</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">#include</span> <span class="str">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;string&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> Student {
+<span class="kw">public</span>:
+    string name;
+    <span class="fn">int</span> age;
+    
+    <span class="fn">void</span> <span class="fn">introduce</span>() {
+        cout << <span class="str">"Hi, I am "</span> << name << <span class="str">", age "</span> << age << endl;
+    }
+};
+
+<span class="fn">int</span> <span class="fn">main</span>() {
+    Student s1;
+    s1.name = <span class="str">"Rahul"</span>;
+    s1.age = <span class="num">20</span>;
+    s1.<span class="fn">introduce</span>();  <span class="cm">// Hi, I am Rahul, age 20</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre></div>
+<div class="ib warn"><strong>⚡ Setup</strong><p>Install: GCC on Linux/Mac (<code>sudo apt install g++</code>) or MinGW on Windows. Or use online IDE: <strong>replit.com</strong> or <strong>onlinegdb.com</strong> — no installation needed! Compile with: <code>g++ filename.cpp -o output && ./output</code></p></div>`
+  },
+
+  'java': {
+    title:'☕ Java Programming', subtitle:'Enterprise software and Android development',
+    tag:'intermediate', xp:150,
+    toc:['Why Java?','Hello World','OOP Concepts','Classes & Objects','Interfaces','Java Collections'],
+    html:`
+<h2>Why Java?</h2>
+<ul>
+<li><strong>Write Once, Run Anywhere</strong> — Java runs on any OS via JVM (Java Virtual Machine)</li>
+<li><strong>Android development</strong> — Android apps were built in Java (now Kotlin, which is similar)</li>
+<li><strong>Enterprise backend</strong> — Banks, governments, large corporations use Java backends</li>
+<li><strong>Strong OOP</strong> — Best language to deeply understand Object-Oriented Programming</li>
+<li><strong>High demand</strong> — Millions of Java jobs worldwide, especially in enterprise and finance</li>
+</ul>
+<div class="ib note"><strong>📌 Java vs JavaScript</strong><p>Despite the name, Java and JavaScript are completely different languages! Java is compiled, strongly typed, for enterprise apps. JavaScript is interpreted, loosely typed, for web browsers. Don't confuse them!</p></div>
+<h2>Hello World in Java</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Java</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">public class</span> HelloWorld {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.<span class="fn">println</span>(<span class="str">"Hello, World!"</span>);
+        System.out.<span class="fn">println</span>(<span class="str">"I am learning Java! ☕"</span>);
+    }
+}</pre></div>
+<h2>Classes and Objects</h2>
+<div class="cb"><div class="cb-head"><span class="cb-lang">Java</span><button class="cb-copy" onclick="copyCode(this)">📋 Copy</button></div><pre><span class="kw">public class</span> Student {
+    <span class="cm">// Fields (attributes)</span>
+    <span class="kw">private</span> String name;
+    <span class="kw">private int</span> age;
+    <span class="kw">private double</span> cgpa;
+    
+    <span class="cm">// Constructor</span>
+    <span class="kw">public</span> <span class="fn">Student</span>(String name, <span class="kw">int</span> age, <span class="kw">double</span> cgpa) {
+        this.name = name;
+        this.age = age;
+        this.cgpa = cgpa;
+    }
+    
+    <span class="cm">// Method</span>
+    <span class="kw">public void</span> <span class="fn">introduce</span>() {
+        System.out.<span class="fn">println</span>(<span class="str">"Hi, I'm "</span> + name + <span class="str">", age "</span> + age);
+        System.out.<span class="fn">println</span>(<span class="str">"CGPA: "</span> + cgpa);
+    }
+}
+
+<span class="cm">// Using the class</span>
+<span class="kw">public class</span> Main {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Student s = <span class="kw">new</span> <span class="fn">Student</span>(<span class="str">"Priya"</span>, <span class="num">20</span>, <span class="num">9.1</span>);
+        s.<span class="fn">introduce</span>();
+    }
+}</pre></div>
+<div class="ib warn"><strong>⚡ Setup</strong><p>Download JDK (Java Development Kit) from <strong>adoptium.net</strong>. Use <strong>IntelliJ IDEA Community</strong> (free, best Java IDE) or VS Code with Java extension. Or use <strong>replit.com</strong> online.</p></div>`
+  },
+};
+
+// ══ RENDER LESSON ══
+function renderLesson(id) {
+  const L = LESSONS[id];
+  if (!L) return;
+  const tc = { beginner:'tag-b', intermediate:'tag-i', advanced:'tag-a' };
+  const isDone = S.done.includes(id);
+  const toc = L.toc.map((t, i) => `<div class="toc-a ${i===0?'active':''}" onclick="scrollToH(this, ${i})">${t}</div>`).join('');
+  document.getElementById('page-lesson').innerHTML = `
+    <div class="les-wrap">
+      <div class="les-main">
+        <div class="les-header">
+          <span class="tag ${tc[L.tag]}">${L.tag}</span>
+          <h1>${L.title}</h1>
+          <p>${L.subtitle}</p>
+          <div class="les-meta"><span>⏱️ ~15 min</span><span>⭐ ${L.xp} XP</span><span>${isDone?'✅ Completed':'📖 In Progress'}</span></div>
+        </div>
+        <div class="les-body">${L.html}</div>
+        <div class="les-nav">
+          <button class="btn btn-ghost" onclick="history.back()">← Back</button>
+          <button class="btn ${isDone?'btn-ghost':'btn-primary'}" onclick="completeLesson('${id}', ${L.xp})">
+            ${isDone ? '✅ Completed!' : `✅ Mark Complete (+${L.xp} XP)`}
+          </button>
+        </div>
+      </div>
+      <div class="les-aside">
+        <div class="toc"><h4>📋 Contents</h4>${toc}</div>
+        <div style="background:linear-gradient(135deg,rgba(0,212,180,.08),rgba(74,158,255,.08));border:1px solid rgba(0,212,180,.2);border-radius:var(--radius-lg);padding:1.1rem;margin-bottom:.9rem">
+          <h4 style="font-size:.875rem;font-weight:700;margin-bottom:.4rem">🎯 Test Yourself</h4>
+          <p style="font-size:.8rem;color:var(--text2);margin-bottom:.7rem">Ready to check your understanding?</p>
+          <button class="btn btn-primary" style="width:100%" onclick="goQuiz('${['html','python','javascript'].includes(id)?id:'general'}')">Take Quick Quiz</button>
+        </div>
+        <div class="card" style="cursor:default">
+          <h4 style="font-size:.83rem;margin-bottom:.4rem">📚 Next Up</h4>
+          <div style="font-size:.78rem;color:var(--text2)">Complete this lesson to earn XP and unlock more advanced content in your learning path.</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function scrollToH(el, idx) {
+  document.querySelectorAll('.toc-a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+  const headers = document.querySelectorAll('.les-body h2');
+  if (headers[idx]) headers[idx].scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function completeLesson(id, xp) {
+  if (!S.done.includes(id)) {
+    S.done.push(id);
+    S.xp += xp;
+    localStorage.setItem('csa-done', JSON.stringify(S.done));
+    localStorage.setItem('csa-xp', S.xp.toString());
+    toast(`🎉 Lesson complete! +${xp} XP earned!`);
+    updateXP();
+    updateAchievements();
+  } else {
+    toast('✅ Already completed! Great work!');
+  }
+}
+
+function updateXP() {
+  document.querySelectorAll('.xp-show').forEach(el => el.textContent = S.xp);
+}
+
+function updateAchievements() {
+  if (S.done.length >= 1) { const el = document.getElementById('ach-first'); if (el) el.style.opacity = '1'; }
+  if (S.xp >= 100) { const el = document.getElementById('ach-100'); if (el) el.style.opacity = '1'; }
+  if (S.done.includes('python') || S.done.includes('fund-algo')) { const el = document.getElementById('ach-python'); if (el) el.style.opacity = '1'; }
+  if (S.done.includes('html') || S.done.includes('css')) { const el = document.getElementById('ach-web'); if (el) el.style.opacity = '1'; }
+}
+
+// ══ ROADMAP ══
+const RM_STEPS = [
+  { ico:'💻', title:'Understanding Computers', desc:'What computers are, hardware vs software, CPU, RAM, storage, the IPO model.', topics:['CPU','RAM','Storage','OS'], status:'done' },
+  { ico:'⌨️', title:'What is Programming?', desc:'Introduction to code, programming languages, and how programs run from source to execution.', topics:['Code','Compiler','Hello World'], status:'done' },
+  { ico:'🧠', title:'Logic & Problem Solving', desc:'Build logical thinking with Boolean logic, decision trees, algorithms, and pseudocode.', topics:['Logic','AND/OR/NOT','Algorithms','Pseudocode'], status:'curr', action:"goLesson('fund-logic')" },
+  { ico:'🌐', title:'HTML & CSS', desc:'Build the structure and style of real web pages. Flexbox, Grid, responsive design.', topics:['HTML Tags','CSS','Flexbox','Responsive'], status:'locked', action:"goLesson('html')" },
+  { ico:'🐍', title:'Python Basics', desc:'Your first programming language — variables, conditions, loops, functions, lists, dicts.', topics:['Variables','If/Else','Loops','Functions','Lists'], status:'locked', action:"goLesson('python')" },
+  { ico:'⚡', title:'JavaScript & the DOM', desc:'Make websites interactive. DOM manipulation, events, fetch API, ES6+.', topics:['DOM','Events','Fetch','ES6+'], status:'locked', action:"goLesson('javascript')" },
+  { ico:'🚀', title:'Build Projects & Portfolio', desc:'Build 3–5 real projects. Portfolio site, calculator, to-do app, weather app. Push to GitHub.', topics:['Portfolio','Calculator','To-Do App','GitHub'], status:'locked' },
+  { ico:'🔧', title:'Backend & Databases', desc:'Build server-side apps with Node.js. Connect to SQL and MongoDB databases.', topics:['Node.js','REST API','SQL','MongoDB'], status:'locked' },
+  { ico:'☁️', title:'Deploy & Start Career', desc:'Deploy your projects live. Build your resume, LinkedIn, and apply for jobs.', topics:['Git','Netlify','Resume','LinkedIn','Jobs'], status:'locked' },
+];
+function buildRoadmap() {
+  const c = document.getElementById('rm-items');
+  if (!c) return;
+  c.innerHTML = RM_STEPS.map((s, i) => `
+    <div class="rm-item ${s.status}">
+      <div class="rm-dot"><div class="rm-circle">${s.ico}</div></div>
+      <div class="rm-body">
+        <div class="rm-status s-${s.status}">${s.status==='done'?'✅ Completed':s.status==='curr'?'🔥 In Progress':`🔒 Step ${i+1} — Locked`}</div>
+        <div class="card ${s.action?'clickable':''}" onclick="${s.action||`toast('Complete previous steps first!')`}" style="${!s.action?'cursor:default':''}">
+          <h3>${s.title}</h3><p>${s.desc}</p>
+          <div class="chips">${s.topics.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+          ${s.status==='done'?`<div class="prog" style="margin-top:.7rem"><div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div></div>`:''}
+          ${s.status==='curr'?`<div class="prog" style="margin-top:.7rem"><div class="prog-lbl"><span>Progress</span><span>40%</span></div><div class="prog-bar"><div class="prog-fill" style="width:40%"></div></div></div>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ══ DASHBOARD ══
+function buildDash() {
+  const pct = Math.round((S.done.length / Object.keys(LESSONS).length) * 100) || 0;
+  const el = document.getElementById('dash-xp');
+  const ring = document.getElementById('xp-ring');
+  const bar = document.getElementById('prog-bar');
+  const pctEl = document.getElementById('prog-pct');
+  if (el) el.textContent = S.xp;
+  if (ring) ring.style.strokeDashoffset = 276.46 - (pct / 100) * 276.46;
+  if (bar) bar.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '%';
+  updateXP();
+  updateAchievements();
+  const lc = document.getElementById('dash-lessons');
+  if (lc) {
+    lc.innerHTML = Object.entries(LESSONS).map(([id, l]) => {
+      const done = S.done.includes(id);
+      return `<div style="display:flex;align-items:center;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:1.1rem">${done?'✅':'⭕'}</span>
+        <div style="flex:1"><div style="font-size:.845rem;font-weight:600">${l.title}</div><div style="font-size:.72rem;color:var(--text3)">${l.xp} XP · ${l.tag}</div></div>
+        <button class="btn btn-ghost" style="font-size:.72rem;padding:.22rem .6rem" onclick="goLesson('${id}')">${done?'Review':'Start'}</button>
+      </div>`;
+    }).join('');
+  }
+}
+
+// ══ QUIZ ENGINE ══
+const QUIZZES = {
+  general: [
+    {q:'What does CPU stand for?',opts:['Central Processing Unit','Computer Power Unit','Central Program Unit','Core Processing Unit'],ans:0},
+    {q:'Which is NOT a programming language?',opts:['Python','HTML','Java','CSS'],ans:1},
+    {q:'What does RAM stand for?',opts:['Random Access Memory','Read Access Memory','Run Application Memory','Real Application Module'],ans:0},
+    {q:'Which symbol starts a comment in Python?',opts:['//','/* */','#','--'],ans:2},
+    {q:'Output of: print(2 + 3 * 4) in Python?',opts:['20','14','24','11'],ans:1},
+  ],
+  html: [
+    {q:'What does HTML stand for?',opts:['HyperText Markup Language','High Text Machine Language','HyperText Modern Language','High Transfer Markup Language'],ans:0},
+    {q:'Which tag creates the largest heading?',opts:['<h6>','<heading>','<h1>','<head>'],ans:2},
+    {q:'Which attribute specifies a link URL?',opts:['src','href','link','url'],ans:1},
+    {q:'What tag is used for a paragraph?',opts:['<para>','<p>','<pg>','<text>'],ans:1},
+    {q:'Self-closing tag for line break?',opts:['<lb>','<newline>','<br>','<break>'],ans:2},
+  ],
+  python: [
+    {q:'How do you print "Hello" in Python?',opts:['echo("Hello")','console.log("Hello")','print("Hello")','System.out.print("Hello")'],ans:2},
+    {q:'Correct way to create a list in Python?',opts:['{1,2,3}','(1,2,3)','[1,2,3]','<1,2,3>'],ans:2},
+    {q:'Keyword to define a function in Python?',opts:['function','def','func','define'],ans:1},
+    {q:'What does len([1,2,3,4]) return?',opts:['3','4','5','Error'],ans:1},
+    {q:'Correct for loop syntax?',opts:['for i in range(5):','for (i=0; i<5; i++)','foreach i in 5:','loop i from 0 to 5:'],ans:0},
+  ],
+  javascript: [
+    {q:'How do you declare a constant in modern JS?',opts:['var x = 5','let x = 5','const x = 5','constant x = 5'],ans:2},
+    {q:'Which method adds to the end of an array?',opts:['push()','pop()','shift()','append()'],ans:0},
+    {q:'Template literal syntax in JS?',opts:['"Hello ${name}"',"'Hello ${name}'",'`Hello ${name}`','Hello + name'],ans:2},
+    {q:'What does === check in JS?',opts:['Value only','Type only','Value and type','Neither'],ans:2},
+    {q:'How to select element by ID?',opts:['document.getElement("id")','document.getElementById("id")','document.query("id")','document.select("#id")'],ans:1},
+  ],
+};
+let CQ = [], CQI = 0, CQS = 0, CQA = false;
+
+function buildQuiz(topic) {
+  const q = QUIZZES[topic] || QUIZZES.general;
+  CQ = [...q].sort(() => Math.random() - 0.5).slice(0, 5);
+  CQI = 0; CQS = 0; CQA = false;
+  renderQ();
+}
+
+function renderQ() {
+  const c = document.getElementById('quiz-box');
+  if (!c) return;
+  if (CQI >= CQ.length) {
+    const pct = Math.round((CQS / CQ.length) * 100);
+    const xp = CQS * 20;
+    S.xp += xp;
+    localStorage.setItem('csa-xp', S.xp.toString());
+    updateXP();
+    c.innerHTML = `
+      <div class="qz-q" style="text-align:center">
+        <div style="font-size:3rem;margin-bottom:.85rem">${pct>=80?'🎉':pct>=60?'👍':'📚'}</div>
+        <h2 style="font-size:1.45rem;margin-bottom:.5rem">Quiz Complete!</h2>
+        <p style="color:var(--text2);margin-bottom:.5rem">You scored <strong style="color:var(--accent)">${CQS}/${CQ.length}</strong> (${pct}%)</p>
+        <p style="color:var(--amber);font-size:.875rem;margin-bottom:.5rem">+${xp} XP earned! 🌟</p>
+        <p style="color:var(--text2);font-size:.875rem;margin-bottom:1.35rem">${pct>=80?'Excellent! You really know this material!':pct>=60?'Good job! Keep practicing.':'Keep studying and try again!'}</p>
+        <div style="display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="buildQuiz('general')">Try Again</button>
+          <button class="btn btn-ghost" onclick="go('home')">Home</button>
+          <button class="btn btn-amber" onclick="go('dashboard')">My Progress</button>
+        </div>
+      </div>`;
+    return;
+  }
+  const q = CQ[CQI];
+  CQA = false;
+  c.innerHTML = `
+    <div style="display:flex;justify-content:space-between;margin-bottom:.65rem">
+      <span style="font-size:.8rem;color:var(--text3)">Question ${CQI+1} of ${CQ.length}</span>
+      <span style="font-size:.8rem;color:var(--accent)">Score: ${CQS}/${CQI}</span>
+    </div>
+    <div class="prog" style="margin-bottom:1.35rem"><div class="prog-bar"><div class="prog-fill" style="width:${(CQI/CQ.length)*100}%"></div></div></div>
+    <div class="qz-q">
+      <div class="qz-txt">${CQI+1}. ${q.q}</div>
+      <div class="qz-opts">
+        ${q.opts.map((o,i)=>`<button class="qz-opt" onclick="pickAns(${i},${q.ans})"><strong>${String.fromCharCode(65+i)}.</strong> ${o}</button>`).join('')}
+      </div>
+    </div>`;
+}
+
+function pickAns(sel, correct) {
+  if (CQA) return;
+  CQA = true;
+  const opts = document.querySelectorAll('.qz-opt');
+  opts.forEach((o,i) => { if (i===correct) o.classList.add('correct'); else if (i===sel && sel!==correct) o.classList.add('wrong'); });
+  if (sel === correct) CQS++;
+  setTimeout(() => { CQI++; renderQ(); }, 1400);
+}
+
+// ── Copy Code ──
+function copyCode(btn) {
+  const pre = btn.closest('.cb').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+  });
+}
+
+// ── Language Filter ──
+function filterLang(type, btn) {
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.lc').forEach(c => {
+    c.style.display = (type==='all' || c.classList.contains(type)) ? '' : 'none';
+  });
+}
+
+// ── Toast ──
+function toast(msg) {
+  const el = document.getElementById('toast-el');
+  el.innerHTML = `<span>✨</span> ${msg}`;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+// ── Notes API Integration ──
+const API_URL = 'https://viratbackend-dqidy5spj-rahshiv034-5890s-projects.vercel.app/api/notes';
+let notesPanelOpen = false;
+
+function toggleNotes() {
+  notesPanelOpen = !notesPanelOpen;
+  document.getElementById('notesPanel').classList.toggle('open', notesPanelOpen);
+  if (notesPanelOpen) fetchNotes();
+}
+
+async function fetchNotes() {
+  const container = document.getElementById('notesList');
+  container.innerHTML = '<div style="text-align:center;color:var(--text3);margin-top:2rem">Loading notes...</div>';
+  try {
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error('Failed to fetch');
+    const notes = await res.json();
+    if (notes.length === 0) {
+      container.innerHTML = '<div style="text-align:center;color:var(--text3);margin-top:2rem">No notes yet. Start typing below!</div>';
+      return;
+    }
+    container.innerHTML = notes.map(n => `
+      <div class="note-item">
+        <button class="note-del" onclick="deleteNote('${n._id}')" title="Delete Note">✕</button>
+        <div class="note-title">${n.title || 'Untitled Note'}</div>
+        <div class="note-content">${n.content}</div>
+        <div class="note-meta">${new Date(n.createdAt || Date.now()).toLocaleString()}</div>
+      </div>
+    `).join('');
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = '<div style="text-align:center;color:var(--red);margin-top:2rem">Failed to load notes. Is the backend running?</div>';
+  }
+}
+
+async function saveNote() {
+  const title = document.getElementById('noteTitle').value.trim();
+  const content = document.getElementById('noteContent').value.trim();
+  if (!content) return toast('Note content cannot be empty!');
+  
+  const btn = document.querySelector('.np-foot button');
+  btn.textContent = 'Saving...';
+  // Note: assuming notes endpoint expects module, title, content
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ module: 'General', title, content })
+    });
+    if (!res.ok) throw new Error('Failed to save');
+    
+    document.getElementById('noteTitle').value = '';
+    document.getElementById('noteContent').value = '';
+    toast('Note saved successfully! ✅');
+    fetchNotes();
+  } catch (err) {
+    toast('Error saving note ❌');
+  } finally {
+    btn.textContent = 'Save Note';
+  }
+}
+
+async function deleteNote(id) {
+  if (!confirm('Are you sure you want to delete this note?')) return;
+  try {
+    const res = await fetch(API_URL + '/' + id, { method: 'DELETE' });
+    if (!res.ok) throw new Error('Failed to delete');
+    toast('Note deleted 🗑️');
+    fetchNotes();
+  } catch (err) {
+    toast('Error deleting note ❌');
+  }
+}
+
+// ── Init ──
+updateXP();
+updateAchievements();
+</script>
+</body>
+</html>
