@@ -1953,7 +1953,8 @@ function toast(msg) {
 }
 
 // ── Notes API Integration ──
-const API_URL = 'https://viratbackend-dqidy5spj-rahshiv034-5890s-projects.vercel.app/api/notes';
+const BACKEND_BASE_URL = window.CS_ACADEMY_API_BASE_URL || 'https://viratbackend-dqidy5spj-rahshiv034-5890s-projects.vercel.app';
+const API_URL = `${BACKEND_BASE_URL}/api/notes`;
 let notesPanelOpen = false;
 
 function toggleNotes() {
@@ -2027,7 +2028,7 @@ async function deleteNote(id) {
 }
 
 // ── Dynamic Lessons API ──
-const LESSONS_API_URL = 'https://techbackend-fovm8ar19-rahshiv034-5890s-projects.vercel.app';
+const LESSONS_API_URL = `${BACKEND_BASE_URL}/api/lessons`;
 async function initLessons() {
   try {
     const res = await fetch(LESSONS_API_URL);
