@@ -2014,6 +2014,7 @@ function toast(msg) {
 }
 
 // ── Auth API Integration ──
+const BACKEND_BASE_URL = window.CS_ACADEMY_API_BASE_URL || 'https://backend-six-delta-92.vercel.app';
 const AUTH_URL = `${BACKEND_BASE_URL}/api/auth`;
 
 function getAuthHeader() {
@@ -2123,7 +2124,6 @@ function handleAuthClick() {
 }
 
 // ── Notes API Integration ──
-const BACKEND_BASE_URL = window.CS_ACADEMY_API_BASE_URL || 'https://backend-six-delta-92.vercel.app';
 const API_URL = `${BACKEND_BASE_URL}/api/notes`;
 let notesPanelOpen = false;
 
