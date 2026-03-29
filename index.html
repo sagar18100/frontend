@@ -478,6 +478,7 @@ th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;
   .les-aside{position:static}
   .stats{grid-template-columns:repeat(2,1fr)}
 }
+.theme-btn-float { display: none; }
 @media(max-width:900px){
   .sidebar{transform:translateX(-100%)}
   .sidebar.open{transform:translateX(0);box-shadow:4px 0 30px rgba(0,0,0,.4)}
@@ -486,6 +487,7 @@ th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;
   .hero-wrap{grid-template-columns:1fr}
   .hero-visual{display:none}
   .g3{grid-template-columns:repeat(2,1fr)}
+  .theme-btn-float { display: flex; position: fixed; bottom: 20px; left: 20px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.3); align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; color: var(--text); }
 }
 @media(max-width:600px){
   .main{padding:1.1rem .9rem}
@@ -523,6 +525,7 @@ th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;
 
 <!-- ═══════════ LAYOUT ═══════════ -->
 <div class="layout">
+<button class="theme-btn-float" onclick="toggleTheme()" id="themeBtnFloat" title="Toggle theme">☀️</button>
 
 <!-- ── SIDEBAR ── -->
 <aside class="sidebar" id="sidebar">
@@ -961,7 +964,10 @@ th{font-weight:700;color:var(--text2);font-size:.73rem;text-transform:uppercase;
 </div><!-- /layout -->
 
 <footer class="footer">
-  <div>⚡ <strong>CS Academy</strong> — Free Computer Science for Everyone</div>
+  <div>
+    ⚡ <strong>CS Academy</strong> — Free Computer Science for Everyone<br>
+    <span style="font-size:.8em; color:var(--text3); margin-top:.4rem; display:inline-block;">✉️ <a href="mailto:csacademy0118@gmail.com" style="color:var(--accent);">csacademy0118@gmail.com</a></span>
+  </div>
   <div style="display:flex;gap:.9rem;flex-wrap:wrap">
     <span onclick="go('intro')" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">Intro</span>
     <span onclick="go('languages')" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">Languages</span>
@@ -1006,7 +1012,10 @@ function applyTheme(t) {
   S.theme = t;
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('csa-theme', t);
-  document.getElementById('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+  const btn1 = document.getElementById('themeBtn');
+  if (btn1) btn1.textContent = t === 'dark' ? '☀️' : '🌙';
+  const btn2 = document.getElementById('themeBtnFloat');
+  if (btn2) btn2.textContent = t === 'dark' ? '☀️' : '🌙';
 }
 function toggleTheme() { applyTheme(S.theme === 'dark' ? 'light' : 'dark'); }
 applyTheme(S.theme);
@@ -1953,7 +1962,7 @@ function toast(msg) {
 }
 
 // ── Notes API Integration ──
-const BACKEND_BASE_URL = window.CS_ACADEMY_API_BASE_URL || 'https://techbackend-two.vercel.app';
+const BACKEND_BASE_URL = window.CS_ACADEMY_API_BASE_URL || 'https://backend-six-delta-92.vercel.app';
 const API_URL = `${BACKEND_BASE_URL}/api/notes`;
 let notesPanelOpen = false;
 
